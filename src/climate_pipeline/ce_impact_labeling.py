@@ -1140,7 +1140,7 @@ def write_ce_impact_label_split_outputs(
 
     report = f"""# CE/Impact 标签拆分报告
 
-本次只对既有 patched 22-case California rerun 输出做确定性后处理，没有重跑 discovery、retrieval、Tavily、NOAA/USDM structured lanes、LLM judge 或 audit agent，也没有改写历史输出。
+对提供的 {cases_postprocessed} 个案例执行确定性标签后处理，复用已有的 case 与 evidence 表，不触发检索或模型调用。
 
 ## 改动内容
 
@@ -1198,7 +1198,7 @@ Impact materiality 也比旧聚合更保守。NOAA structured row 中的 road-on
 
     old_vs = f"""# 旧标签与 CE/Impact 拆分对比
 
-本文件比较 patched rerun 的旧 `pipeline_label` 与新的三轴输出。该步骤是 label/output split，不是新 retrieval run。
+本文件比较已有 `pipeline_label` 与拆分后的三轴输出，复用既有检索结果。
 
 ## 旧 pipeline labels
 

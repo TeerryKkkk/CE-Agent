@@ -6,8 +6,8 @@ from types import SimpleNamespace
 
 import pytest
 
-from src.climate_pipeline import full_body_direct_judge as direct
-from src.climate_pipeline import llm_evidence_validation as validation
+from climate_pipeline import full_body_direct_judge as direct
+from climate_pipeline import llm_evidence_validation as validation
 
 
 BODY = (

@@ -3,10 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 from types import SimpleNamespace
 
-from src.climate_pipeline.ce_impact_labeling import derive_case_level_split_labels
-from src.climate_pipeline.controlled_open_retrieval import TavilyCostController, initial_cost_ledger
-from src.climate_pipeline.llm_evidence_judge import ModelCallResult
-from src.climate_pipeline.llm_query_expansion import (
+from climate_pipeline.ce_impact_labeling import derive_case_level_split_labels
+from climate_pipeline.controlled_open_retrieval import TavilyCostController, initial_cost_ledger
+from climate_pipeline.llm_evidence_judge import ModelCallResult
+from climate_pipeline.llm_query_expansion import (
     FOUND_BY,
     LLMQueryExpansionConfig,
     annotate_expansion_report_with_outcomes,
@@ -14,7 +14,7 @@ from src.climate_pipeline.llm_query_expansion import (
     plan_llm_query_expansion,
     validate_generated_query,
 )
-from src.web_reader import WebReaderResult
+from climate_pipeline.web_reader import WebReaderResult
 from scripts.retrieve import build_case_outputs, execute_open_query_rows, new_retrieval_state, web_evidence_rows_from_validation
 
 

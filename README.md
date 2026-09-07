@@ -31,8 +31,13 @@ Use Python 3.11 or later; Python 3.12 is used for testing.
 
 ```bash
 python -m venv .venv
-# Activate .venv using your shell's activation command.
-python -m pip install -r requirements.txt
+```
+
+Activate it with `.venv\Scripts\Activate.ps1` in PowerShell or
+`source .venv/bin/activate` on macOS/Linux, then install the project:
+
+```bash
+python -m pip install .
 python scripts/replay.py --verify
 ```
 
@@ -43,10 +48,11 @@ not rerun language-model inference or repeat live source retrieval.
 To save a new set of outputs:
 
 ```bash
-python scripts/replay.py --verify --output-dir runs/california40
+python scripts/replay.py --verify --output-dir examples/california40/outputs/replay
 ```
 
-The output directory must not already exist.
+The output directory must not already exist. Generated files under `outputs/`
+are ignored by Git.
 
 ## Included example
 
@@ -69,6 +75,11 @@ aggregation also uses the structured evidence in the example.
 Inputs, source URLs, field definitions, and reference outputs are in
 [`examples/california40/`](examples/california40/). The accompanying inventory contains
 408 candidates; the replay evaluates the 40-case subset in `candidate_manifest.csv`.
+
+`replay_inputs/` contains archived pages, model judgments, structured evidence,
+and their provenance. The `final_*` tables, guard records, and acceptance baseline
+are fixed validation fixtures. Regenerated summaries and unresolved-case/page
+exports belong in `outputs/`, not alongside these fixtures.
 
 ## Retrieval and validation
 
@@ -97,9 +108,12 @@ Large raw climate datasets and bulk official-record caches are obtained separate
 ## Tests
 
 ```bash
-python -m pip install -r requirements-dev.txt
+python -m pip install ".[test]"
 python -m pytest
 ```
+
+CI runs the full suite and the offline replay on Linux and Windows, checks imports
+from the installed package, and verifies that the example leaves Git status clean.
 
 ## Data and interpretation
 

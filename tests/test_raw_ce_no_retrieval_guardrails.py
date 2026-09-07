@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 import inspect
-from pathlib import Path
 
-import src.raw_ce_candidate_pilot as pilot
+from climate_pipeline import candidate_construction as pilot
 
 
 def _module_source() -> str:
-    return Path("src/raw_ce_candidate_pilot.py").read_text(encoding="utf-8")
+    return inspect.getsource(pilot)
 
 
 def test_construction_phase_does_not_reference_dter_fields() -> None:

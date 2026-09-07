@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.climate_pipeline.llm_evidence_judge import (
+from climate_pipeline.llm_evidence_judge import (
     JudgeSchemaError,
     deterministic_arbiter,
     validate_arbiter_judgment,

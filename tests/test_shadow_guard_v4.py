@@ -4,7 +4,7 @@ import copy
 
 import pytest
 
-from src.climate_pipeline import full_body_direct_judge as direct
+from climate_pipeline import full_body_direct_judge as direct
 
 
 CANDIDATE = {

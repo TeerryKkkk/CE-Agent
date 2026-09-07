@@ -5,8 +5,8 @@ from typing import Mapping
 
 import pytest
 
-from src.climate_pipeline import case_aggregation as legacy_aggregation
-from src.climate_pipeline.pipeline.canonical_aggregation import (
+from climate_pipeline import case_aggregation as legacy_aggregation
+from climate_pipeline.pipeline.canonical_aggregation import (
     CANONICAL_AGGREGATOR_VERSION,
     SHADOW_CANDIDATE_SCOPE_POLICY_VERSION,
     CanonicalAggregationError,
@@ -14,9 +14,9 @@ from src.climate_pipeline.pipeline.canonical_aggregation import (
     combine_repaired_v2_source_mix,
     derive_repaired_v2_views,
 )
-from src.climate_pipeline.pipeline.frozen_webpage_adapter import FROZEN_WEBPAGE_LANE
-from src.climate_pipeline.pipeline.official_adapters import NOAA_LANE, USDM_LANE
-from src.climate_pipeline.pipeline.schemas import (
+from climate_pipeline.pipeline.frozen_webpage_adapter import FROZEN_WEBPAGE_LANE
+from climate_pipeline.pipeline.official_adapters import NOAA_LANE, USDM_LANE
+from climate_pipeline.pipeline.schemas import (
     AxisCoverageState,
     AxisName,
     AxisValue,

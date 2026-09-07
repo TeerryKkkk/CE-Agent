@@ -1514,12 +1514,12 @@ def _prior_url_audit_action(url: str, loss_cause: str, scorecard: dict[str, Any]
     if "weather.gov/lub/" in normalized and not scorecard:
         return (
             "intentionally_dropped",
-            "The page is a credible NWS regional event page, but the retained page has no Phase 2.3.1 candidate/query association and does not provide a target-county match for the frozen 37 sample.",
+            "The page is a credible NWS regional event page, but the retained page has no candidate/query association and does not provide a target-county match for the frozen 37-candidate sample.",
         )
     if "drought.gov/news/" in normalized and not scorecard:
         return (
             "intentionally_dropped",
-            "The page is a credible statewide drought-to-deluge article, but it lacks a retained Phase 2.3.1 candidate/query association and is not county-specific enough for strict body validation.",
+            "The page is a credible statewide drought-to-deluge article, but it lacks a retained candidate/query association and is not county-specific enough for strict body validation.",
         )
     if loss_cause == "hard_reject":
         return (
@@ -1656,9 +1656,9 @@ def build_prior_accepted_open_url_audit(
 
 def build_prior_accepted_open_url_audit_markdown(audit_rows: list[dict[str, Any]]) -> str:
     lines = [
-        "# Phase 2.3.2 Prior Accepted Open URL Audit",
+        "# Prior Accepted Open URL Audit",
         "",
-        "| Candidate | URL | 2.3.1 fetched | 2.3.1 lane | Score | Decision | Loss cause | Calibration decision |",
+        "| Candidate | URL | Prior fetched | Prior lane | Score | Decision | Loss cause | Calibration decision |",
         "| --- | --- | ---: | --- | ---: | --- | --- | --- |",
     ]
     for row in audit_rows:
@@ -1681,7 +1681,7 @@ def build_prior_accepted_open_url_audit_markdown(audit_rows: list[dict[str, Any]
                 f"### {row.get('url')}",
                 "",
                 f"- Candidate: {row.get('candidate_id')}",
-                f"- Phase 2.3.1 decision: {row.get('phase2_3_1_decision')} (score: {row.get('phase2_3_1_score')})",
+                f"- Prior decision: {row.get('phase2_3_1_decision')} (score: {row.get('phase2_3_1_score')})",
                 f"- Hard reject: {row.get('hard_reject_reason') or 'none'}",
                 f"- Loss cause: {row.get('loss_cause')}",
                 f"- Calibration decision: {row.get('calibration_decision')}",
@@ -1777,7 +1777,7 @@ def build_phase232_replay_report(replay: dict[str, Any], audit_rows: list[dict[s
     dropped = replay.get("intentionally_dropped_prior_urls", [])
     false_causes = Counter(replay.get("false_negative_causes", {}))
     cause_lines = "\n".join(f"- {key}: {value}" for key, value in false_causes.most_common()) or "- None."
-    return f"""# Phase 2.3.2 Offline Replay Report
+    return f"""# Offline Retrieval Calibration Report
 
 ## Summary
 
@@ -1799,7 +1799,7 @@ def build_phase232_replay_report(replay: dict[str, Any], audit_rows: list[dict[s
 
 ## Audit Basis
 
-The replay treats the seven Phase 2.3 baseline accepted open URLs as calibration positives, except URLs explicitly
+The replay treats baseline accepted open URLs as calibration positives, except URLs explicitly
 marked `intentionally_dropped` in `prior_accepted_open_url_audit.jsonl` because they are outside the frozen Texas
 candidate scope or lack a retained candidate/query association.
 """

@@ -16,22 +16,13 @@ from typing import Any, Iterable
 
 from . import config
 
-try:  # Canonical PYTHONPATH=src namespace.
-    from io_utils import safe_write_json, safe_write_text
-    from rainfall_p99_pipeline import (
-        MappingResult,
-        build_grid_to_county_lookup,
-        coord_key,
-        find_default_county_boundary_file,
-    )
-except ImportError:  # Compatibility for historical `src.climate_pipeline` imports.
-    from ..io_utils import safe_write_json, safe_write_text
-    from ..rainfall_p99_pipeline import (
-        MappingResult,
-        build_grid_to_county_lookup,
-        coord_key,
-        find_default_county_boundary_file,
-    )
+from .io_utils import safe_write_json, safe_write_text
+from .rainfall_p99_pipeline import (
+    MappingResult,
+    build_grid_to_county_lookup,
+    coord_key,
+    find_default_county_boundary_file,
+)
 
 SCHEMA_VERSION = "raw_ce_pilot_v1"
 DEFAULT_CONFIG_PATH = config.PROJECT_ROOT / "configs" / "raw_ce_pilot_texas_2021_2025.yaml"

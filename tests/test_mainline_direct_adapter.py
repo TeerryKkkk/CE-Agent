@@ -5,14 +5,14 @@ from types import SimpleNamespace
 from scripts.retrieve import (
     web_evidence_rows_from_validation as demo_web_evidence_rows,
 )
-from src.climate_pipeline.pipeline.canonical_aggregation import (
+from climate_pipeline.pipeline.canonical_aggregation import (
     aggregate_repaired_v2_case,
 )
-from src.climate_pipeline.pipeline.remaining_production_adapter import (
+from climate_pipeline.pipeline.remaining_production_adapter import (
     adapt_webpage_checkpoints,
 )
-from src.climate_pipeline.pipeline.official_adapters import NOAA_LANE, USDM_LANE
-from src.climate_pipeline.pipeline.schemas import (
+from climate_pipeline.pipeline.official_adapters import NOAA_LANE, USDM_LANE
+from climate_pipeline.pipeline.schemas import (
     AxisCoverageState,
     AxisName,
     AxisValue,
@@ -23,7 +23,7 @@ from src.climate_pipeline.pipeline.schemas import (
     PhysicalCandidateStatus,
     PhysicalStatusRecord,
 )
-from src.climate_pipeline.production_manifest_protocol import (
+from climate_pipeline.production_manifest_protocol import (
     web_evidence_rows_from_validation as production_web_evidence_rows,
 )
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import inspect
 
-from src.climate_pipeline import case_aggregation as aggregation
+from climate_pipeline import case_aggregation as aggregation
 
 
 def structured(**overrides: str) -> dict[str, str]:

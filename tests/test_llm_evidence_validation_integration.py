@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from src.climate_pipeline.evidence_span_extractor import CandidateContext, extract_candidate_spans
-from src.climate_pipeline.llm_evidence_judge import apply_safety_gates
-from src.climate_pipeline.llm_evidence_validation import (
+from climate_pipeline.evidence_span_extractor import CandidateContext, extract_candidate_spans
+from climate_pipeline.llm_evidence_judge import apply_safety_gates
+from climate_pipeline.llm_evidence_validation import (
     LLMEvidenceJudgeConfig,
     LLMEvidenceValidationUnavailable,
     pre_gate_page,
@@ -162,7 +162,7 @@ def test_component_impact_does_not_imply_transition_support() -> None:
 
 
 def test_missing_llm_fails_closed_when_enabled(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
-    monkeypatch.setattr("src.climate_pipeline.llm_evidence_validation.read_openai_api_key", lambda path=None: "")
+    monkeypatch.setattr("climate_pipeline.llm_evidence_validation.read_openai_api_key", lambda path=None: "")
     with pytest.raises(LLMEvidenceValidationUnavailable):
         validate_fetched_pages_with_llm_judge(
             pages=[],

@@ -1,4 +1,0 @@
-candidate_id,county,drought_hazard_support,wet_hazard_support,impact_support,explicit_hazard_to_impact_attribution_support,explicit_linkage_support,support_tier,webpage_count,webpage_supported_count,webpage_unresolved_count,webpage_insufficient_count
-rawce_37fd8be9ff47459e,Inyo County,yes,unresolved,unresolved,unresolved,no,needs_review,3,0,3,0
-rawce_562241dbd09d9b4b,Mariposa County,yes,unresolved,unresolved,unresolved,no,needs_review,3,0,1,0
-rawce_4747396341aee37e,Tulare County,yes,unresolved,no,no,no,needs_review,3,0,1,0

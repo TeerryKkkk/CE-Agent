@@ -6,14 +6,21 @@ build-backend = "setuptools.build_meta"
 name = "ce-agent"
 version = "0.1.0"
 description = "Compound-event evidence retrieval, validation, and deterministic replay."
+readme = "README.md"
 requires-python = ">=3.11"
 dependencies = ["tiktoken>=0.7,<1", "PyYAML>=6,<7"]
 
+[project.optional-dependencies]
+test = ["pytest>=8,<10"]
+
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["climate_pipeline*"]
+include = ["climate_pipeline", "climate_pipeline.*"]
+namespaces = false
+
+[tool.setuptools.package-data]
+"climate_pipeline" = ["configs/*.yaml"]
 
 [tool.pytest.ini_options]
-pythonpath = [".", "src"]
 testpaths = ["tests"]
 addopts = "-q"

@@ -4,8 +4,14 @@ import os
 from pathlib import Path
 
 RUN_MODE = "raw_ce_active"
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PROJECT_HOME = Path(os.getenv("CE_AGENT_PROJECT_ROOT", PROJECT_ROOT.parent)).resolve()
+_SOURCE_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(
+    os.getenv(
+        "CE_AGENT_PROJECT_ROOT",
+        _SOURCE_ROOT if (_SOURCE_ROOT / "pyproject.toml").is_file() else Path.cwd(),
+    )
+).resolve()
+PROJECT_HOME = PROJECT_ROOT
 DATA_ROOT = Path(os.getenv("CE_AGENT_DATA_ROOT", PROJECT_HOME / "data")).resolve()
 RUN_ROOT = Path(os.getenv("CE_AGENT_RUN_ROOT", PROJECT_HOME / "runs")).resolve()
 DATA_DIR = DATA_ROOT

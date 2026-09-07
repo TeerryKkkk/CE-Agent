@@ -5,20 +5,15 @@ import csv
 import hashlib
 import json
 import os
-import sys
 from collections import Counter
 from pathlib import Path
 from typing import Any, Iterable
-
-ROOT = Path(__file__).resolve().parents[1]
-SRC_ROOT = ROOT / "src"
-if str(SRC_ROOT) not in sys.path:
-    sys.path.insert(0, str(SRC_ROOT))
 
 from climate_pipeline.case_aggregation import recompute_case_results
 from climate_pipeline.full_body_direct_judge import derive_local_page_result
 
 
+ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SNAPSHOT = ROOT / "examples" / "california40"
 PAGE_FIELDS = [
     "page_id",

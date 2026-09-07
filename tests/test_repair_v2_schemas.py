@@ -4,7 +4,7 @@ from dataclasses import replace
 
 import pytest
 
-from src.climate_pipeline.pipeline.schemas import (
+from climate_pipeline.pipeline.schemas import (
     AxisCoverageState,
     AxisName,
     AxisValue,

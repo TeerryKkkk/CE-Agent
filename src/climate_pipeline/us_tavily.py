@@ -11,7 +11,7 @@ from typing import Any
 from . import config
 from .schema_models import SearchResult
 
-from climate_pipeline.bounded_http import (
+from .bounded_http import (
     BoundedHttpError,
     no_redirect_opener,
     read_bounded,

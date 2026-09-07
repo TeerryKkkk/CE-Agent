@@ -16,14 +16,9 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from typing import Any, Iterable
 
-try:  # Canonical PYTHONPATH=src imports.
-    from climate_pipeline import config
-    from hashing import make_id
-    from io_utils import safe_write_text
-except ImportError:  # Historical src.rainfall_p99_pipeline compatibility.
-    from . import config
-    from .hashing import make_id
-    from .io_utils import safe_write_text
+from . import config
+from .hashing import make_id
+from .io_utils import safe_write_text
 
 
 REQUIRED_RAINFALL_FIELDS = {

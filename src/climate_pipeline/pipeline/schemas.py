@@ -1,9 +1,7 @@
-"""Canonical repaired-v2 schemas for the CE-Agent evidence pipeline.
+"""Canonical evidence schemas for the CE-Agent pipeline.
 
-This module is the sole Python schema authority introduced by repair Step 1
-(W007-W011).  It deliberately does not change runner or aggregation behavior.
-The scientific meanings are owned by ``contracts/ce_agent_repair_v2.json``;
-the enums and validators below are the executable encoding of that contract.
+Enums, records, and validators encode the versioned scientific contract for
+physical candidates, source evidence, coverage, and case-level support.
 """
 
 from __future__ import annotations

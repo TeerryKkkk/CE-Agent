@@ -1,4 +1,4 @@
-"""Offline-only USDM vector auxiliary-grade implementation for repair Step 4.
+"""Offline USDM vector alignment for auxiliary spatial provenance.
 
 County-week D1+ remains the sole drought-support authority.  This module reads
 one immutable local production-support package and reports only bounded grid-
@@ -19,7 +19,7 @@ import struct
 from typing import Any, Iterable, Mapping, Sequence
 import zipfile
 
-from rainfall_p99_pipeline import (
+from ..rainfall_p99_pipeline import (
     CountyFeature,
     _crs_is_lonlat_wgs84_compatible,
     _parse_dbf_records,

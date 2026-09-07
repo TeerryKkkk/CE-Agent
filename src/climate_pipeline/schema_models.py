@@ -5,7 +5,61 @@ from datetime import datetime
 from typing import Any
 from urllib.parse import urlparse
 
-from . import config
+AGENCY_TYPES = {
+    "government_portal",
+    "emergency_management",
+    "water_resources",
+    "meteorology",
+    "agriculture_rural_affairs",
+    "flood_drought_control",
+    "disaster_relief_civil_affairs",
+    "development_reform_or_energy",
+    "transportation",
+    "power_utility_public_agency",
+    "other_public_agency",
+    "unknown",
+}
+
+SOURCE_TIERS = {
+    "national",
+    "provincial",
+    "municipal",
+    "county",
+    "township_or_village_mention_only",
+    "basin_or_regional",
+    "unknown",
+}
+
+ACTION_TYPES = {
+    "discover_source",
+    "search_evidence",
+    "fetch_page",
+    "classify_page",
+    "extract_evidence",
+    "drill_down_admin",
+    "expand_agency",
+    "stop_with_sufficient_evidence",
+    "stop_no_public_official_evidence_found",
+}
+
+PAGE_TYPES = {
+    "forecast_warning",
+    "observed_hazard_report",
+    "response_notice",
+    "impact_report",
+    "hydrological_report",
+    "agricultural_impact_report",
+    "recovery_notice",
+    "termination_notice",
+    "preparedness_plan",
+    "responsibility_list",
+    "policy_interpretation",
+    "statistical_bulletin",
+    "cross_region_repost",
+    "historical_background",
+    "irrelevant",
+    "unknown",
+}
 
 
 class SchemaValidationError(ValueError):
@@ -682,9 +736,9 @@ class OfficialSource(ModelMixin):
     notes: str | None = None
 
     def __post_init__(self) -> None:
-        if self.agency_type not in config.AGENCY_TYPES:
+        if self.agency_type not in AGENCY_TYPES:
             raise ValueError(f"Unsupported agency_type: {self.agency_type}")
-        if self.source_tier not in config.SOURCE_TIERS:
+        if self.source_tier not in SOURCE_TIERS:
             raise ValueError(f"Unsupported source_tier: {self.source_tier}")
         if self.validation_status != "validated_official":
             self.allowed_for_main_evidence = False
@@ -715,7 +769,7 @@ class RetrievalAction(ModelMixin):
     executed_at: str | None = None
 
     def __post_init__(self) -> None:
-        if self.action_type not in config.ACTION_TYPES:
+        if self.action_type not in ACTION_TYPES:
             raise ValueError(f"Unsupported action_type: {self.action_type}")
 
 
@@ -771,7 +825,7 @@ class PageAudit(ModelMixin):
     page_type_labels: list[str] = field(default_factory=list)
 
     def __post_init__(self) -> None:
-        if self.page_type not in config.PAGE_TYPES:
+        if self.page_type not in PAGE_TYPES:
             raise ValueError(f"Unsupported page_type: {self.page_type}")
         if self.primary_page_type is None:
             self.primary_page_type = self.page_type

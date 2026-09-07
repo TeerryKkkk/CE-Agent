@@ -9,6 +9,8 @@ from pathlib import Path
 from tempfile import NamedTemporaryFile
 from typing import Any, Iterable
 
+from . import config
+
 
 def to_jsonable(obj: Any) -> Any:
     if is_dataclass(obj):
@@ -27,14 +29,12 @@ def to_jsonable(obj: Any) -> Any:
 def repo_relative_path(path: str | Path) -> str:
     candidate = Path(path)
     try:
-        return candidate.resolve().relative_to(__import__("src.config", fromlist=["PROJECT_ROOT"]).PROJECT_ROOT).as_posix()
+        return candidate.resolve().relative_to(config.PROJECT_ROOT).as_posix()
     except Exception:
         return candidate.as_posix()
 
 
 def ensure_dirs() -> None:
-    from . import config
-
     for path in [
         config.OUTPUT_DIR,
         config.OUTPUT_DIR / "event_dossiers",

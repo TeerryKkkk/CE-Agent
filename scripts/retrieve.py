@@ -6,31 +6,21 @@ import argparse
 import csv
 import json
 import os
-import sys
 from collections import Counter, defaultdict
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, Iterable
 
-
-REPO_ROOT = Path(__file__).resolve().parents[1]
-SRC_ROOT = REPO_ROOT / "src"
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
-if str(SRC_ROOT) not in sys.path:
-    sys.path.insert(0, str(SRC_ROOT))
-
-
-from climate_pipeline.ce_impact_labeling import (  # noqa: E402
+from climate_pipeline.ce_impact_labeling import (
     classify_evidence_impact,
     derive_accepted_gate_flags,
     derive_case_level_split_labels,
 )
-from climate_pipeline.case_aggregation import (  # noqa: E402
+from climate_pipeline.case_aggregation import (
     aggregate_case_axes,
     support_tier,
 )
-from climate_pipeline.controlled_open_retrieval import (  # noqa: E402
+from climate_pipeline.controlled_open_retrieval import (
     TavilyCostController,
     build_lane_queries,
     build_search_result_cache,
@@ -43,17 +33,17 @@ from climate_pipeline.controlled_open_retrieval import (  # noqa: E402
     score_prefetch_result,
     stable_query_fingerprint,
 )
-from climate_pipeline.llm_evidence_judge import (  # noqa: E402
+from climate_pipeline.llm_evidence_judge import (
     quoted_spans_are_body_grounded,
     read_openai_api_key,
 )
-from climate_pipeline.llm_evidence_validation import (  # noqa: E402
+from climate_pipeline.llm_evidence_validation import (
     LLMEvidenceJudgeConfig,
     LLMEvidenceValidationUnavailable,
     target_hazard_axis_for_page,
     validate_fetched_pages_with_llm_judge,
 )
-from climate_pipeline.llm_query_expansion import (  # noqa: E402
+from climate_pipeline.llm_query_expansion import (
     EXPANSION_REPORT_FIELDS,
     LLMQueryExpansionConfig,
     LLMQueryExpansionUnavailable,
@@ -61,17 +51,18 @@ from climate_pipeline.llm_query_expansion import (  # noqa: E402
     make_run_id,
     plan_llm_query_expansion,
 )
-from climate_pipeline.official_source_lanes import (  # noqa: E402
+from climate_pipeline.official_source_lanes import (
     OfficialSourceLaneControls,
     official_sources_attempted_text,
     run_structured_official_lanes_for_case,
     support_flags_from_evidence_rows,
 )
-from src.io_utils import safe_write_json, safe_write_text, write_jsonl  # noqa: E402
-from src.us_tavily import TavilySearchClient, read_tavily_api_key  # noqa: E402
-from src.web_reader import WebReader  # noqa: E402
+from climate_pipeline.io_utils import safe_write_json, safe_write_text, write_jsonl
+from climate_pipeline.us_tavily import TavilySearchClient, read_tavily_api_key
+from climate_pipeline.web_reader import WebReader
 
 
+REPO_ROOT = Path(__file__).resolve().parents[1]
 PROJECT_HOME = Path(os.getenv("CE_AGENT_PROJECT_ROOT", REPO_ROOT))
 DATA_ROOT = Path(os.getenv("CE_AGENT_DATA_ROOT", PROJECT_HOME / "data"))
 DEFAULT_INVENTORY = REPO_ROOT / "examples" / "california40" / "candidate_inventory.csv"
@@ -1096,7 +1087,7 @@ def write_safety_reports(
                 f"- Manifest path: `{manifest_path}`",
                 f"- Inventory path: `{inventory_path}`",
                 f"- Texas path/cache/data leakage: {'yes' if leakage else 'no'}",
-                "- Phase 2.3 final validator used: no",
+                "- Legacy baseline validator used for final decisions: no",
                 "- DuckDuckGo fallback enabled: no",
             ]
         )
@@ -1110,7 +1101,7 @@ def write_safety_reports(
                 "",
                 "- Old positive labels are preserved only in `old_positive_label_if_any` provenance fields.",
                 "- Current CE, impact, and case-use labels are recomputed from current accepted evidence rows only.",
-                "- Historical writers and `scripts/connect_ce_impact_profiles.py` were not used.",
+                "- Final labels use the current evidence validator and label aggregator.",
                 "- Old positive labels copied as current labels: no",
             ]
         )
@@ -1167,12 +1158,11 @@ def write_summary(
     blocking = [row for row in data_quality_issues if row.get("severity") == "blocking"]
     warnings = [row for row in data_quality_issues if row.get("severity") != "blocking"]
     lines = [
-        "# California Manifest Runner 2-Case Summary",
+        "# California Manifest Retrieval Summary",
         "",
         f"- Run timestamp UTC: {datetime.now(UTC).isoformat()}",
         f"- Cases loaded: {len(cases)}",
-        f"- Both case IDs loaded from current California primary 408: {'yes' if len(cases) == 2 else 'no'}",
-        "- Runner used Phase 2.3 as final validator: no",
+        "- Legacy baseline validator used for final decisions: no",
         "- Candidate construction regenerated: no",
         f"- Texas path/cache/data leakage: {'yes' if safety['texas_path_cache_data_leakage'] else 'no'}",
         f"- DuckDuckGo records = 0: {'yes' if duckduckgo_count == 0 else 'no'}",
@@ -1596,7 +1586,7 @@ def main(argv: list[str] | None = None) -> int:
                 severity="blocking",
                 candidate_id="",
                 issue_type="texas_or_phase_cache_path_leakage",
-                details="A configured output/cache path contains Texas or Phase 2.x naming.",
+                details="A configured output/cache path contains Texas or reserved legacy-run naming.",
             )
         )
     if validation_result is not None and validation_result.schema_failure_rows:

@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from src.climate_pipeline.ce_impact_labeling import (
+from climate_pipeline.ce_impact_labeling import (
     derive_accepted_gate_flags,
     derive_admin_response_status,
     derive_case_level_split_labels,
     derive_combined_impact_status,
     derive_direct_observed_impact_status,
 )
-from src.climate_pipeline.official_source_lanes import (
+from climate_pipeline.official_source_lanes import (
     OfficialSourceLaneControls,
     admin_response_flags_from_evidence_rows,
     openfema_evidence_row,

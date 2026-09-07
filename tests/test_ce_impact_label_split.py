@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from src.climate_pipeline.ce_impact_labeling import (
+from climate_pipeline.ce_impact_labeling import (
     classify_evidence_impact,
     derive_case_level_split_labels,
     derive_case_use_label,

@@ -4,6 +4,13 @@ __pycache__/
 venv/
 .pytest_cache/
 .ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+.coverage.*
+htmlcov/
+.DS_Store
+Thumbs.db
 *.egg-info/
 build/
 dist/
@@ -11,6 +18,9 @@ dist/
 .env.*
 !.env.example
 apikey.*
+*_apikey.*
+*_api_key.*
+apikeys/
 credentials.*
 *.pem
 *.key
@@ -19,3 +29,10 @@ credentials.*
 runs/
 results/
 reports/
+outputs/
+cache/
+
+# Regenerated replay summaries; input and reference fixtures remain tracked.
+/examples/california40/replay_summary.json
+/examples/california40/unresolved_cases.csv
+/examples/california40/unresolved_pages.csv

@@ -6,13 +6,13 @@ from pathlib import Path
 
 import pytest
 
-from src.climate_pipeline.ce_impact_labeling import (
+from climate_pipeline.ce_impact_labeling import (
     classify_evidence_impact,
     derive_accepted_gate_flags,
     derive_case_level_split_labels,
 )
-from src.climate_pipeline import official_source_lanes
-from src.climate_pipeline.official_source_lanes import (
+from climate_pipeline import official_source_lanes
+from climate_pipeline.official_source_lanes import (
     OfficialSourceLaneControls,
     support_flags_from_evidence_rows,
     usdm_evidence_row,
