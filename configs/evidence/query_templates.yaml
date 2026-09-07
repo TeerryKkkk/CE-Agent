@@ -1,0 +1,137 @@
+{
+  "version": "source_aware_query_templates_v5",
+  "date": "2026-06-06",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "templates": {
+    "official_adapter_query": {
+      "retrieval_channel": "official_adapter",
+      "template": "{county_terms} {state} {hazard_terms} {role_terms} {date_terms} site:{domain}"
+    },
+    "domain_search_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} {role_terms} {date_terms} site:{domain}"
+    },
+    "county_emergency_proclamation_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} local emergency proclamation OES emergency operations evacuation shelter damage response {date_terms} site:{domain}"
+    },
+    "county_public_works_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} public works road closure levee drainage culvert infrastructure damage storm response {date_terms} site:{domain}"
+    },
+    "flood_control_district_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} flood control district levee drainage creek river stormwater runoff flood fight {date_terms} site:{domain}"
+    },
+    "cnrfc_hydrologic_summary_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} river forecast center hydrologic storm summary dry antecedent conditions reservoir deficits runoff flood stage {date_terms} site:{domain}"
+    },
+    "dwr_hydrologic_summary_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} DWR water resources storm summary flood fight reservoir storage stormwater capture groundwater recharge drought resilience {date_terms} site:{domain}"
+    },
+    "fema_declaration_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} FEMA disaster declaration designated areas incident period public assistance {date_terms} site:{domain}"
+    },
+    "openfema_declaration_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} OpenFEMA disaster declarations summaries incident period designated county {start_year} site:{domain}"
+    },
+    "caloes_declaration_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} Cal OES emergency proclamation disaster declaration response recovery {date_terms} site:{domain}"
+    },
+    "state_local_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} {role_terms} {date_terms} official emergency response"
+    },
+    "agriculture_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} crop damage farmland flooding livestock pasture irrigation shortage prevented planting crop insurance cause of loss {date_terms} site:{domain}"
+    },
+    "extension_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} UC Cooperative Extension UC ANR UCCE agriculture crop farm irrigation livestock pasture farmland flooding {date_terms} site:{domain}"
+    },
+    "county_agriculture_report_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} agricultural commissioner crop report livestock report agriculture annual report {hazard_terms} {date_terms} site:{domain}"
+    },
+    "county_agriculture_event_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} crop damage farmland flooding irrigation shortage livestock pasture harvest delay agricultural commissioner {date_terms} site:{domain}"
+    },
+    "county_agriculture_programmatic_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} FSA disaster designation emergency loan RMA crop insurance indemnity cause of loss agriculture {date_terms} site:{domain}"
+    },
+    "fsa_drought_designation_county_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {start_year} drought FSA disaster designation emergency loan primary county site:{domain}"
+    },
+    "fsa_drought_designation_fips_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_fips} {start_year} drought designation FSA emergency loan site:{domain}"
+    },
+    "fsa_drought_designation_state_news_query": {
+      "retrieval_channel": "domain_search",
+      "template": "USDA designates {state} counties primary natural disaster areas drought {start_year} site:{domain}/news-events/news"
+    },
+    "fsa_drought_designation_primary_counties_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_name} {state} {start_year} drought FSA \"Primary Counties Eligible\" \"Application Deadline\" site:{domain}/news-events/news"
+    },
+    "fsa_disaster_designation_hazard_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {start_year} {hazard_terms} FSA disaster designation emergency loan primary county site:{domain}"
+    },
+    "fsa_disaster_designation_primary_counties_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_name} {state} {start_year} {hazard_terms} FSA \"Primary Counties Eligible\" \"Application Deadline\" site:{domain}/news-events/news"
+    },
+    "drought_gov_usda_designation_index_query": {
+      "retrieval_channel": "domain_search",
+      "template": "USDA Drought Disaster Designations {county_terms} {state} {county_fips} {start_year} drought site:{domain}"
+    },
+    "local_official_bulletin_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} {role_terms} official county bulletin alert update report {date_terms} site:{domain}"
+    },
+    "local_bulletin_agriculture_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} agricultural commissioner crop livestock report drought flood damage irrigation pasture {date_terms} official bulletin site:{domain}"
+    },
+    "compound_linkage_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} drought rainfall flooding agriculture impact {date_terms} site:{domain}"
+    },
+    "media_query": {
+      "retrieval_channel": "domain_search",
+      "template": "{county_terms} {state} {hazard_terms} impact response agriculture {date_terms} AP Reuters local media"
+    },
+    "diagnostic_official_query": {
+      "retrieval_channel": "diagnostic_search",
+      "template": "{county_terms} {state} {hazard_terms} {date_terms} official disaster impact"
+    },
+    "diagnostic_agriculture_query": {
+      "retrieval_channel": "diagnostic_search",
+      "template": "{county_terms} {state} {hazard_terms} agriculture agricultural commissioner crop report crop damage livestock irrigation farmland flooding {date_terms}"
+    },
+    "diagnostic_local_query": {
+      "retrieval_channel": "diagnostic_search",
+      "template": "{county_terms} {state} {hazard_terms} emergency response road closure damage {date_terms}"
+    }
+  },
+  "role_terms": {
+    "hazard_occurrence": "hazard occurrence event summary observations warning",
+    "official_response": "disaster declaration emergency response assistance recovery",
+    "public_impact": "damage impacts evacuation road closure infrastructure",
+    "agriculture_impact_direct": "crop damage farmland flooding livestock pasture irrigation shortage harvest delay",
+    "agriculture_impact_programmatic": "FSA disaster designation emergency loan RMA crop insurance indemnity cause of loss",
+    "agriculture_context": "agricultural commissioner annual crop report livestock report acreage production county agriculture context",
+    "hydrologic_impact": "streamflow gauge flood stage water level",
+    "compound_linkage": "drought rainfall flooding agriculture impact linkage"
+  }
+}

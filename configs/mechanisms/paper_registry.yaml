@@ -1,0 +1,81 @@
+{
+  "version": "0.1.0",
+  "date": "2026-06-12",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "papers": [
+    {
+      "paper_id": "zscheischler_2020_compound_event_typology",
+      "title": "A typology of compound weather and climate events",
+      "authors": ["Zscheischler et al."],
+      "year": 2020,
+      "role": "definition_foundation",
+      "source_type": "peer_reviewed_article",
+      "doi": "10.1038/s43017-020-0060-z",
+      "url": "https://doi.org/10.1038/s43017-020-0060-z",
+      "hazard_pair_scope": "all_compound_candidates",
+      "mechanism_relevance": "Supports compound-event framing and typology.",
+      "mechanism_concepts": ["compound-event typology", "compound weather and climate events"],
+      "candidate_level_meaning": "Definition support only, not confirmation."
+    },
+    {
+      "paper_id": "qing_2023_drought_pluvial_feedbacks",
+      "title": "Soil moisture-atmosphere feedbacks have triggered the shifts from drought to pluvial conditions since 1980",
+      "authors": ["Qing et al."],
+      "year": 2023,
+      "role": "physical_mechanism",
+      "source_type": "peer_reviewed_article",
+      "doi": null,
+      "url": null,
+      "hazard_pair_scope": "drought_to_pluvial_flood",
+      "mechanism_relevance": "Supports drought-to-pluvial transition and soil moisture-atmosphere feedback mechanisms.",
+      "mechanism_concepts": [
+        "drought-to-pluvial transition",
+        "soil moisture-atmosphere feedback",
+        "latent heat flux",
+        "moisture convergence",
+        "precipitation shift"
+      ],
+      "candidate_level_meaning": "Type-level plausibility only."
+    },
+    {
+      "paper_id": "swain_2025_hydroclimate_volatility",
+      "title": "Hydroclimate volatility on a warming Earth",
+      "authors": ["Swain et al."],
+      "year": 2025,
+      "role": "transition_risk_framework",
+      "source_type": "peer_reviewed_article",
+      "doi": null,
+      "url": null,
+      "hazard_pair_scope": "drought_to_pluvial_flood",
+      "mechanism_relevance": "Supports dry-to-wet hydroclimate whiplash and volatility framing.",
+      "mechanism_concepts": [
+        "hydroclimate volatility",
+        "hydroclimate whiplash",
+        "dry-to-wet transition",
+        "abrupt wet/dry regime shift"
+      ],
+      "candidate_level_meaning": "Type-level plausibility only."
+    },
+    {
+      "paper_id": "deflorio_2024_california_drought_to_flood",
+      "title": "From California's Extreme Drought to Major Flooding",
+      "authors": ["DeFlorio et al."],
+      "year": 2024,
+      "role": "regional_context",
+      "source_type": "peer_reviewed_article",
+      "doi": null,
+      "url": null,
+      "hazard_pair_scope": "drought_to_pluvial_flood",
+      "supported_regions": ["california", "western_us"],
+      "mechanism_relevance": "Supports California and western-US regional context for transition from multi-year drought to atmospheric-river-driven flooding.",
+      "mechanism_concepts": [
+        "atmospheric river",
+        "drought-to-flood transition",
+        "reservoir recovery",
+        "damaging floods",
+        "debris flows"
+      ],
+      "candidate_level_meaning": "Region-level plausibility only, not confirmation."
+    }
+  ]
+}

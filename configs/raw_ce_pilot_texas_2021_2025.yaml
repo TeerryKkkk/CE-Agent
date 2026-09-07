@@ -1,0 +1,25 @@
+pilot_name: raw_ce_pilot_texas_2021_2025
+state: Texas
+state_abbrev: TX
+state_fips: "48"
+rainfall_start_date: 2021-01-01
+rainfall_end_date: 2025-12-31
+rainfall_threshold: p99
+
+policy_version: raw_ce_pilot_texas_2021_2025_v1
+temporal_policy_version: temporal_post_drought_month_end_1_90d_v1
+spatial_policy_version: spatial_same_fips_grid_distance_75km_v1
+candidate_id_policy_version: raw_candidate_sha256_construction_fields_v1
+deduplication_policy_version: dedup_exact_then_same_rainfall_endmonth31_lagbin_v1
+drought_grouping_policy_version: drought_same_fips_overlap_or_gap_31d_v1
+rainfall_grouping_policy_version: rainfall_same_fips_event_or_overlap_gap_1d_v1
+
+near_grid_threshold_km: 75
+primary_lag_min_days: 1
+primary_lag_max_days: 90
+
+spei3_input_path: dataset/spei3_drought_us_2000_2025.csv
+rainfall_input_path: dataset/events_extreme_rain_pr3_p99_1985_2025.csv
+dter_input_path: dataset/dter_eca_events_us_2000_2025.csv
+county_boundary_path: data/raw/tl_2024_us_county.zip
+output_dir: outputs/raw_ce_pilot/texas_2021_2025

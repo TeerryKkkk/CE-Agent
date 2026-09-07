@@ -1,0 +1,16 @@
+{
+  "case_count": 40,
+  "case_support_tier_counts": {
+    "hazards_and_impact_supported_no_explicit_linkage": 31,
+    "needs_review": 3,
+    "partial_or_no_public_support": 6
+  },
+  "external_api_calls": 0,
+  "page_count": 110,
+  "page_result_counts": {
+    "does_not_support": 65,
+    "insufficient_source_content": 7,
+    "supports": 6,
+    "unresolved": 32
+  }
+}

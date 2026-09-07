@@ -1,0 +1,49 @@
+{
+  "schema_version": "remaining368_formal_acceptance_policy_v1",
+  "policy_id": "remaining368_zero_failure_prepublication_v1",
+  "frozen_before_formal_execution": true,
+  "candidate_terminal_states": [
+    "complete",
+    "technical_failure"
+  ],
+  "stage_terminal_states": [
+    "complete",
+    "technical_failure"
+  ],
+  "incomplete_is_terminal": false,
+  "technical_failure_maximum_for_success": 0,
+  "coverage_warning_maximum_for_success": 0,
+  "resume_required_for": [
+    "incomplete_stage",
+    "retryable_provider_failure",
+    "process_exit_after_durable_call_intent_before_durable_response"
+  ],
+  "whole_run_stop_conditions": [
+    "immutable_package_identity_mismatch",
+    "effective_config_or_code_identity_mismatch",
+    "corrupt_or_partial_checkpoint",
+    "checkpoint_parent_hash_mismatch",
+    "runner_attempt_limit_exhausted",
+    "external_request_hard_cap_reached",
+    "concurrent_run_lock_conflict",
+    "output_or_checkpoint_collision"
+  ],
+  "publication_blockers": [
+    "any_technical_failure",
+    "any_coverage_warning",
+    "any_incomplete_candidate_or_stage",
+    "candidate_count_not_368",
+    "remaining_candidate_set_hash_mismatch",
+    "independent_post_run_scientific_audit_not_approved",
+    "explicit_release_authorization_absent"
+  ],
+  "all_candidates_terminal_does_not_imply_publication_ready": true,
+  "formal_completion_requires": {
+    "candidate_count": 368,
+    "remaining_id_set_sha256": "c58d19e9ac092f24fab23d19f1c1bfefb602dc95609cc389965b18f0f6612eab",
+    "all_required_stages_terminal": true,
+    "partial_output_allowed_as_complete": false
+  },
+  "publication_requires_independent_post_run_audit": true,
+  "publication_requires_explicit_release_authorization": true
+}

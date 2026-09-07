@@ -1,0 +1,57 @@
+{
+  "version": "0.1.0",
+  "date": "2026-06-12",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "mechanisms": [
+    {
+      "mechanism_id": "mech_drought_to_pluvial_flood_v0",
+      "hazard_pair_id": "drought_to_pluvial_flood",
+      "hazard_pair_name": "Drought -> pluvial / heavy rainfall / flood",
+      "mechanism_status": "accepted",
+      "mechanism_scope": {
+        "type_level": true,
+        "region_level": ["global", "western_us", "california"],
+        "candidate_level": false
+      },
+      "mechanism_names": [
+        "drought-to-pluvial transition",
+        "soil moisture-atmosphere feedback",
+        "hydroclimate whiplash",
+        "atmospheric-river-driven drought-to-flood transition",
+        "antecedent dry conditions and flood/runoff response"
+      ],
+      "physical_chain": [
+        "antecedent drought / soil moisture deficit / storage deficit",
+        "land-atmosphere feedback, hydrologic storage deficit, or atmospheric-river forcing",
+        "heavy precipitation / pluvial episode / flood response",
+        "compound risk to water systems, agriculture, infrastructure, or emergency response"
+      ],
+      "core_papers": [
+        "zscheischler_2020_compound_event_typology",
+        "qing_2023_drought_pluvial_feedbacks",
+        "swain_2025_hydroclimate_volatility",
+        "deflorio_2024_california_drought_to_flood"
+      ],
+      "public_evidence_keywords": [
+        "dry antecedent conditions",
+        "antecedent soil moisture",
+        "soil moisture deficit",
+        "reservoir storage deficit",
+        "atmospheric river",
+        "runoff",
+        "flood fight",
+        "flood control system",
+        "stormwater capture",
+        "groundwater recharge",
+        "reservoir recovery",
+        "water supply deficit"
+      ],
+      "candidate_level_meaning": [
+        "this supports scientific plausibility of the hazard-pair type",
+        "this does not prove candidate-specific compound-event status",
+        "this does not upgrade final label",
+        "candidate-specific public evidence and strict pair-linkage remain required"
+      ]
+    }
+  ]
+}

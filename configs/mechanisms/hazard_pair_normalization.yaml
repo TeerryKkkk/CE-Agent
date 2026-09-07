@@ -1,0 +1,36 @@
+{
+  "version": "0.1.0",
+  "date": "2026-06-12",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "rules": [
+    {
+      "rule_id": "drought_to_pluvial_flood_v0",
+      "drought_side_hazards": [
+        "drought",
+        "agricultural_drought",
+        "water_shortage"
+      ],
+      "pluvial_or_flood_side_hazards": [
+        "rainfall",
+        "heavy_rainfall",
+        "extreme_rainfall",
+        "flood",
+        "flooding",
+        "pluvial",
+        "storm",
+        "winter_storm",
+        "atmospheric_river",
+        "flood_related_rainfall",
+        "extreme_rainfall_flood",
+        "flash_flood",
+        "inland_flooding",
+        "river_flood",
+        "winter_storm_flooding"
+      ],
+      "hazard_pair_id": "drought_to_pluvial_flood",
+      "hazard_pair_direction": "drought_to_pluvial_or_flood",
+      "mechanism_family": "hydroclimate_transition",
+      "candidate_level_meaning": "Normalization maps a candidate to a hazard-pair type only; it does not confirm events."
+    }
+  ]
+}

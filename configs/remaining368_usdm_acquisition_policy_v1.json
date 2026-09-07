@@ -1,0 +1,24 @@
+{
+  "schema_version": "ce_agent_remaining368_usdm_acquisition_policy_v1",
+  "policy_version": "remaining368_usdm_official_snapshot_20260719_v1",
+  "frozen_before_acquisition": true,
+  "as_of_cutoff_utc": "2026-07-19T17:00:00Z",
+  "official_endpoint_template": "https://usdmdataservices.unl.edu/api/CountyStatistics/GetDroughtSeverityStatisticsByAreaPercent?aoi={county_fips}&startdate={reference_tuesday}&enddate={reference_tuesday}&statisticsType=1",
+  "request_headers": {
+    "Accept": "text/csv",
+    "User-Agent": "CE-Agent-remaining368-USDM-package/1.0"
+  },
+  "reference_week_rule": "previous_or_same_tuesday_from_drought_end_month_end",
+  "geography_rule": "five_digit_county_fips_exact_match",
+  "source_role_rule": "D1_is_cumulative_D1_plus_county_area_percent",
+  "statistics_type": 1,
+  "transport_retries": 0,
+  "timeout_seconds": 30,
+  "max_response_bytes": 131072,
+  "controlled_session_successes_required_per_request": 1,
+  "controlled_session_conflict_rule": "different_valid_success_bytes_for_same_request_is_unresolved_and_blocks_package",
+  "prior_local_variant_rule": "preserve_all_distinct_prior_local_candidates; select_only_the_new_controlled_official_session_response; prior_variants_never_select_by_downstream_case_result",
+  "selection_rule": "controlled_official_session_response_completed_at_or_before_frozen_cutoff",
+  "downstream_result_access_during_selection": false,
+  "live_fallback_during_production": false
+}

@@ -1,0 +1,24 @@
+file,column,description_zh,values_or_notes
+final_40_case_results.csv,candidate_id,稳定 physical candidate 标识,与 candidate_manifest.csv 一致
+final_40_case_results.csv,county,候选县名,California county
+final_40_case_results.csv,drought_hazard_support,结构化官方证据支持的干旱轴,yes|no|unresolved
+final_40_case_results.csv,wet_hazard_support,网页或结构化证据支持的湿事件轴,yes|no|unresolved
+final_40_case_results.csv,impact_support,已实现影响轴,yes|no|unresolved
+final_40_case_results.csv,explicit_hazard_to_impact_attribution_support,目标 hazard 到 impact 的明确归因轴,yes|no|unresolved
+final_40_case_results.csv,explicit_linkage_support,干旱到湿事件的明确 transition/linkage 轴,yes|no|unresolved
+final_40_case_results.csv,support_tier,由分离轴确定性派生的最终层级,all_four_axes_supported|hazards_and_impact_supported_no_explicit_linkage|both_hazard_axes_supported|needs_review|partial_or_no_public_support
+final_110_candidate_page_results.csv,page_id,稳定 candidate-page 标识,candidate_id 与稳定 URL 派生
+final_110_candidate_page_results.csv,candidate_id,页面绑定的 candidate 标识,不得跨 candidate 聚合
+final_110_candidate_page_results.csv,semantic_provenance,采用的已保存语义输出来源,frozen_original_110|v1_targeted_rerun|native_targeted_rerun
+final_110_candidate_page_results.csv,terminal_state,保存的模型终态,ok|incomplete|not_requested_unusable_source 等
+final_110_candidate_page_results.csv,model_support_recommendation,模型建议的正向上限,supports|does_not_support|needs_review|空
+final_110_candidate_page_results.csv,page_result,quote-grounded guards 后的页面结论,supports|does_not_support|unresolved|insufficient_source_content
+final_110_candidate_page_results.csv,candidate_hazard_support,该页对候选 wet hazard 的轴值,yes|no|unresolved
+final_110_candidate_page_results.csv,realized_impact_support,该页对 realized impact 的轴值,yes|no|unresolved
+final_110_candidate_page_results.csv,attribution_support,该页对 hazard-impact attribution 的轴值,yes|no|unresolved
+final_110_candidate_page_results.csv,transition_support,该页对 drought-to-wet transition 的轴值,yes|no|unresolved
+replay_inputs/candidate_page_manifest.jsonl,body_sha256,冻结网页正文 SHA-256,逐页重放前强制验证
+replay_inputs/candidate_page_manifest.jsonl,request_sha256,冻结模型请求 SHA-256,provenance only
+replay_inputs/final_semantic_judgments.jsonl,parsed_semantic_result,最终集成的已保存模型语义 JSON,不读取 audit labels
+replay_inputs/structured_evidence_results.csv,deterministic_match_accepted,结构化官方记录是否通过字段级匹配,true|false
+provenance_manifest.json,replay_input_sha256,portable replay 输入文件哈希映射,SHA-256

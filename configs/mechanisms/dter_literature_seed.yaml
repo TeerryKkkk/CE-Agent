@@ -1,0 +1,60 @@
+{
+  "version": "0.1.0",
+  "date": "2026-06-18",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "purpose": "DTER-specific type-level literature expansion seeds. This file extends, but does not replace, the static mechanism configs.",
+  "hazard_pair_id": "drought_to_pluvial_flood",
+  "reuse_existing_paper_registry": true,
+  "seed_papers": [
+    {
+      "paper_id": "zscheischler_2020_compound_event_typology",
+      "reason_for_inclusion": "Definition foundation for compound weather and climate event terminology.",
+      "categories": ["definition_papers"]
+    },
+    {
+      "paper_id": "qing_2023_drought_pluvial_feedbacks",
+      "reason_for_inclusion": "Type-level support for drought-to-pluvial transitions and soil-moisture or land-atmosphere feedback mechanisms.",
+      "categories": [
+        "mechanism_papers",
+        "drought_to_flood_or_rainfall_papers",
+        "antecedent_soil_moisture_runoff_papers"
+      ]
+    },
+    {
+      "paper_id": "swain_2025_hydroclimate_volatility",
+      "reason_for_inclusion": "Type-level dry-to-wet and hydroclimate volatility framing relevant to drought-to-extreme-rainfall reasoning.",
+      "categories": [
+        "mechanism_papers",
+        "drought_to_flood_or_rainfall_papers"
+      ]
+    },
+    {
+      "paper_id": "deflorio_2024_california_drought_to_flood",
+      "reason_for_inclusion": "Regional drought-to-flood transition context, retained as type-level or region-level background only.",
+      "categories": [
+        "drought_to_flood_or_rainfall_papers",
+        "erosion_agriculture_water_resource_impact_papers"
+      ]
+    }
+  ],
+  "semantic_scholar_queries": [
+    "compound weather and climate events drought flood",
+    "drought followed by extreme rainfall",
+    "drought to flood transition",
+    "dry to wet transition hydroclimate",
+    "antecedent drought flood response",
+    "antecedent soil moisture runoff flooding",
+    "drought vegetation loss erosion heavy rainfall",
+    "drought water resource management subsequent storm impacts",
+    "compound drought pluvial events"
+  ],
+  "category_definitions": {
+    "definition_papers": "Definitions, typologies, or conceptual frameworks for compound weather or climate events.",
+    "mechanism_papers": "Physical or hydrologic mechanisms relevant to drought-to-extreme-rainfall transitions.",
+    "drought_to_flood_or_rainfall_papers": "Studies explicitly addressing drought-to-wet, drought-to-rainfall, drought-to-pluvial, or drought-to-flood transitions.",
+    "antecedent_soil_moisture_runoff_papers": "Studies of antecedent soil moisture, infiltration, runoff generation, or flood response.",
+    "erosion_agriculture_water_resource_impact_papers": "Studies connecting drought or dry conditions to erosion, agriculture, water-resource, storm, runoff, or management impacts.",
+    "rejected_irrelevant": "Retrieved records that do not support DTER type-level mechanism background from metadata."
+  },
+  "candidate_specific_use_boundary": "Type-level scientific context only. Literature records are not candidate-specific public evidence unless the paper explicitly studies the exact candidate geography and event window."
+}

@@ -1,0 +1,311 @@
+{
+    "schema_version":  "ce_agent_frozen_california_40_full_body_direct_judge_v1",
+    "model":  "gpt-5.5-2026-04-23",
+    "reasoning_effort":  "high",
+    "max_output_tokens":  12000,
+    "context_window_tokens":  1050000,
+    "retry_policy":  "at_most_one_identical_retry_only_for_transport_provider_failure_or_explicit_incomplete",
+    "prompt":  "You are CE-Agent\u0027s single direct webpage semantic judge. Judge only CANDIDATE and the complete SOURCE_TEXT. Do not browse, use outside knowledge, use prior labels, or infer why the source was selected.\n\nFirst decide whether the source is readable and whether it contains zero concrete candidate-relevant events, exactly one uniquely candidate-relevant event, or unresolved event identity. A page may mention many events yet still have one unique candidate-relative event after applying the candidate date, location, and target hazards. If more than one event remains plausibly candidate-relative and fields cannot be assigned to one unique event, return unresolved_event_identity and do not combine fields.\n\nKeep event dates separate from publication, update, warning, forecast, order, declaration, response, recovery, and historical-context dates. Record each important date with its semantic role and ISO normalized bounds when the text supports normalization; otherwise use empty strings. Publication, warning, forecast, order, declaration, response, or recovery dates do not establish event timing.\n\nKeep event location separate from document, agency, jurisdiction, or statewide scope. Distinguish observed or retrospective events from warnings, forecasts, orders, planning, and generic context. Separate observed hazards from prospective hazards. Separate realized impacts from potential risk, asset/crop/economic value, aid, budgets, declarations, and administrative action. An evacuation warning or order is not proof that evacuation occurred. Values are not losses unless the source explicitly calls them damage or loss.\n\nExplicit hazard-to-impact attribution requires source language connecting a realized impact to a target hazard; co-occurrence is not attribution. Explicit drought-to-wet transition requires source language describing that transition; mere chronology is not transition support.\n\nEvery quote must be an exact substring of SOURCE_TEXT. Use empty arrays rather than invented evidence. The candidate-support recommendation is audit-only; deterministic local guards make the formal result. Return only the required JSON.",
+    "strict_schema":  {
+                          "type":  "object",
+                          "additionalProperties":  false,
+                          "required":  [
+                                           "source_readability",
+                                           "readability_reason",
+                                           "event_identity",
+                                           "event_actuality",
+                                           "date_mentions",
+                                           "event_date_relation",
+                                           "event_locations",
+                                           "location_quotes",
+                                           "event_location_relation",
+                                           "observed_hazards",
+                                           "prospective_hazards",
+                                           "hazard_quotes",
+                                           "target_hazard_status",
+                                           "realized_impacts",
+                                           "potential_impacts_or_risks",
+                                           "asset_or_economic_values",
+                                           "aid_or_administrative_actions",
+                                           "target_hazard_observed_impact",
+                                           "explicit_target_hazard_to_impact_attribution",
+                                           "attribution_quotes",
+                                           "explicit_drought_to_wet_transition",
+                                           "transition_quotes",
+                                           "candidate_support_recommendation",
+                                           "supporting_quotes",
+                                           "uncertainty"
+                                       ],
+                          "properties":  {
+                                             "source_readability":  {
+                                                                        "type":  "string",
+                                                                        "enum":  [
+                                                                                     "readable",
+                                                                                     "uncertain",
+                                                                                     "unusable"
+                                                                                 ]
+                                                                    },
+                                             "readability_reason":  {
+                                                                        "type":  "string"
+                                                                    },
+                                             "event_identity":  {
+                                                                    "type":  "string",
+                                                                    "enum":  [
+                                                                                 "one_uniquely_relevant_event",
+                                                                                 "unresolved_event_identity",
+                                                                                 "zero_concrete_relevant_event"
+                                                                             ]
+                                                                },
+                                             "event_actuality":  {
+                                                                     "type":  "string",
+                                                                     "enum":  [
+                                                                                  "mixed_or_uncertain",
+                                                                                  "observed",
+                                                                                  "order_or_administrative_action",
+                                                                                  "planning_or_generic_context",
+                                                                                  "retrospective_observed",
+                                                                                  "warning_or_forecast"
+                                                                              ]
+                                                                 },
+                                             "date_mentions":  {
+                                                                   "type":  "array",
+                                                                   "items":  {
+                                                                                 "type":  "object",
+                                                                                 "additionalProperties":  false,
+                                                                                 "required":  [
+                                                                                                  "text",
+                                                                                                  "semantic_role",
+                                                                                                  "normalized_start",
+                                                                                                  "normalized_end",
+                                                                                                  "quote"
+                                                                                              ],
+                                                                                 "properties":  {
+                                                                                                    "text":  {
+                                                                                                                 "type":  "string"
+                                                                                                             },
+                                                                                                    "semantic_role":  {
+                                                                                                                          "type":  "string",
+                                                                                                                          "enum":  [
+                                                                                                                                       "declaration",
+                                                                                                                                       "event_day",
+                                                                                                                                       "event_end",
+                                                                                                                                       "event_start",
+                                                                                                                                       "forecast",
+                                                                                                                                       "historical_context",
+                                                                                                                                       "incident_period",
+                                                                                                                                       "order",
+                                                                                                                                       "publication",
+                                                                                                                                       "recovery",
+                                                                                                                                       "response",
+                                                                                                                                       "unknown",
+                                                                                                                                       "update",
+                                                                                                                                       "warning"
+                                                                                                                                   ]
+                                                                                                                      },
+                                                                                                    "normalized_start":  {
+                                                                                                                             "type":  "string"
+                                                                                                                         },
+                                                                                                    "normalized_end":  {
+                                                                                                                           "type":  "string"
+                                                                                                                       },
+                                                                                                    "quote":  {
+                                                                                                                  "type":  "string"
+                                                                                                              }
+                                                                                                }
+                                                                             }
+                                                               },
+                                             "event_date_relation":  {
+                                                                         "type":  "string",
+                                                                         "enum":  [
+                                                                                      "aligned",
+                                                                                      "outside_candidate",
+                                                                                      "unknown"
+                                                                                  ]
+                                                                     },
+                                             "event_locations":  {
+                                                                     "type":  "array",
+                                                                     "items":  {
+                                                                                   "type":  "string"
+                                                                               }
+                                                                 },
+                                             "location_quotes":  {
+                                                                     "type":  "array",
+                                                                     "items":  {
+                                                                                   "type":  "string"
+                                                                               }
+                                                                 },
+                                             "event_location_relation":  {
+                                                                             "type":  "string",
+                                                                             "enum":  [
+                                                                                          "aligned",
+                                                                                          "not_aligned",
+                                                                                          "unknown"
+                                                                                      ]
+                                                                         },
+                                             "observed_hazards":  {
+                                                                      "type":  "array",
+                                                                      "items":  {
+                                                                                    "type":  "string"
+                                                                                }
+                                                                  },
+                                             "prospective_hazards":  {
+                                                                         "type":  "array",
+                                                                         "items":  {
+                                                                                       "type":  "string"
+                                                                                   }
+                                                                     },
+                                             "hazard_quotes":  {
+                                                                   "type":  "array",
+                                                                   "items":  {
+                                                                                 "type":  "string"
+                                                                             }
+                                                               },
+                                             "target_hazard_status":  {
+                                                                          "type":  "string",
+                                                                          "enum":  [
+                                                                                       "absent_or_context",
+                                                                                       "anticipated_or_warning",
+                                                                                       "incompatible_hazard_only",
+                                                                                       "observed",
+                                                                                       "uncertain"
+                                                                                   ]
+                                                                      },
+                                             "realized_impacts":  {
+                                                                      "type":  "array",
+                                                                      "items":  {
+                                                                                    "type":  "object",
+                                                                                    "additionalProperties":  false,
+                                                                                    "required":  [
+                                                                                                     "claim",
+                                                                                                     "quote"
+                                                                                                 ],
+                                                                                    "properties":  {
+                                                                                                       "claim":  {
+                                                                                                                     "type":  "string"
+                                                                                                                 },
+                                                                                                       "quote":  {
+                                                                                                                     "type":  "string"
+                                                                                                                 }
+                                                                                                   }
+                                                                                }
+                                                                  },
+                                             "potential_impacts_or_risks":  {
+                                                                                "type":  "array",
+                                                                                "items":  {
+                                                                                              "type":  "object",
+                                                                                              "additionalProperties":  false,
+                                                                                              "required":  [
+                                                                                                               "claim",
+                                                                                                               "quote"
+                                                                                                           ],
+                                                                                              "properties":  {
+                                                                                                                 "claim":  {
+                                                                                                                               "type":  "string"
+                                                                                                                           },
+                                                                                                                 "quote":  {
+                                                                                                                               "type":  "string"
+                                                                                                                           }
+                                                                                                             }
+                                                                                          }
+                                                                            },
+                                             "asset_or_economic_values":  {
+                                                                              "type":  "array",
+                                                                              "items":  {
+                                                                                            "type":  "object",
+                                                                                            "additionalProperties":  false,
+                                                                                            "required":  [
+                                                                                                             "claim",
+                                                                                                             "quote"
+                                                                                                         ],
+                                                                                            "properties":  {
+                                                                                                               "claim":  {
+                                                                                                                             "type":  "string"
+                                                                                                                         },
+                                                                                                               "quote":  {
+                                                                                                                             "type":  "string"
+                                                                                                                         }
+                                                                                                           }
+                                                                                        }
+                                                                          },
+                                             "aid_or_administrative_actions":  {
+                                                                                   "type":  "array",
+                                                                                   "items":  {
+                                                                                                 "type":  "object",
+                                                                                                 "additionalProperties":  false,
+                                                                                                 "required":  [
+                                                                                                                  "claim",
+                                                                                                                  "quote"
+                                                                                                              ],
+                                                                                                 "properties":  {
+                                                                                                                    "claim":  {
+                                                                                                                                  "type":  "string"
+                                                                                                                              },
+                                                                                                                    "quote":  {
+                                                                                                                                  "type":  "string"
+                                                                                                                              }
+                                                                                                                }
+                                                                                             }
+                                                                               },
+                                             "target_hazard_observed_impact":  {
+                                                                                   "type":  "string",
+                                                                                   "enum":  [
+                                                                                                "no",
+                                                                                                "uncertain",
+                                                                                                "yes"
+                                                                                            ]
+                                                                               },
+                                             "explicit_target_hazard_to_impact_attribution":  {
+                                                                                                  "type":  "string",
+                                                                                                  "enum":  [
+                                                                                                               "no",
+                                                                                                               "uncertain",
+                                                                                                               "yes"
+                                                                                                           ]
+                                                                                              },
+                                             "attribution_quotes":  {
+                                                                        "type":  "array",
+                                                                        "items":  {
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                    },
+                                             "explicit_drought_to_wet_transition":  {
+                                                                                        "type":  "string",
+                                                                                        "enum":  [
+                                                                                                     "no",
+                                                                                                     "uncertain",
+                                                                                                     "yes"
+                                                                                                 ]
+                                                                                    },
+                                             "transition_quotes":  {
+                                                                       "type":  "array",
+                                                                       "items":  {
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                   },
+                                             "candidate_support_recommendation":  {
+                                                                                      "type":  "string",
+                                                                                      "enum":  [
+                                                                                                   "does_not_support",
+                                                                                                   "needs_review",
+                                                                                                   "supports"
+                                                                                               ]
+                                                                                  },
+                                             "supporting_quotes":  {
+                                                                       "type":  "array",
+                                                                       "items":  {
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                   },
+                                             "uncertainty":  {
+                                                                 "type":  "string"
+                                                             }
+                                         }
+                      },
+    "guard_implementation_path":  "src/climate_pipeline/full_body_direct_judge.py",
+    "guard_implementation_sha256":  "9ac82d0a02d003d5c5416259650fe38933f61497aa42036c85c86f83207025bf",
+    "runner_sha256":  "689cee700ce1d1f1ec7613713a57a6b626eb034c023a30569a28e799a6d8fe1a",
+    "input_price_per_million":  5.0,
+    "output_price_per_million":  30.0,
+    "hard_cost_cap_usd":  40.0,
+    "aggregation_version":  "separate_webpage_and_structured_axes_v1"
+}

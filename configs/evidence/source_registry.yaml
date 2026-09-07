@@ -1,0 +1,359 @@
+{
+  "version": "us_source_registry_v4",
+  "date": "2026-06-06",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "sources": {
+    "noaa_storm_events": {
+      "family": "noaa_nws",
+      "authority_type": "federal_structured_data",
+      "evidence_roles": ["hazard_occurrence", "public_impact"],
+      "hazards": ["extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "county or NWS zone depending on product",
+      "temporal_resolution": "event or day",
+      "access": {"type": "domain_search", "documentation_url": "https://www.ncdc.noaa.gov/stormevents/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["candidate event records", "event narrative pages"],
+      "domains": ["ncdc.noaa.gov", "noaa.gov"],
+      "limitations": ["Search records are candidates only until fetched, audited, and span-validated."]
+    },
+    "noaa_nws_local_products": {
+      "family": "noaa_nws",
+      "authority_type": "federal_official_text",
+      "evidence_roles": ["hazard_occurrence", "public_impact", "official_response"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "NWS office or local forecast area",
+      "temporal_resolution": "product, event, or day",
+      "access": {"type": "domain_search", "documentation_url": "https://www.weather.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["local event summaries", "warnings", "statements"],
+      "domains": ["weather.gov"],
+      "limitations": ["Local office pages may be broader than the target county."]
+    },
+    "cnrfc_nws_hydrologic_summaries": {
+      "family": "noaa_nws",
+      "authority_type": "federal_official_text",
+      "evidence_roles": ["hazard_occurrence", "hydrologic_impact", "compound_linkage"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "river forecast center basin, watershed, river, or county when stated",
+      "temporal_resolution": "storm summary, hydrologic event period, or seasonal outlook",
+      "access": {"type": "domain_search", "documentation_url": "https://www.cnrfc.noaa.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type", "evidence_role"],
+      "outputs": ["storm summaries", "hydrologic summaries", "river forecast center candidate pages"],
+      "domains": ["cnrfc.noaa.gov", "weather.gov", "noaa.gov"],
+      "query_domain_strategy": "all_domains",
+      "query_strategy": "all_matching_roles",
+      "role_template_overrides": {
+        "hazard_occurrence": "cnrfc_hydrologic_summary_query",
+        "hydrologic_impact": "cnrfc_hydrologic_summary_query",
+        "compound_linkage": "cnrfc_hydrologic_summary_query"
+      },
+      "limitations": ["Basin-level pages must still pass target county, basin, time, and body-span alignment."]
+    },
+    "usdm_drought_monitor": {
+      "family": "usdm_drought",
+      "authority_type": "federal_structured_data",
+      "evidence_roles": ["hazard_occurrence"],
+      "hazards": ["drought", "compound_candidate"],
+      "spatial_resolution": "county, state, and map area",
+      "temporal_resolution": "weekly",
+      "access": {"type": "official_adapter", "documentation_url": "https://droughtmonitor.unl.edu/"},
+      "query_inputs": ["county_fips", "date_range"],
+      "outputs": ["drought severity candidate records"],
+      "domains": ["droughtmonitor.unl.edu", "drought.gov"],
+      "limitations": ["Hazard occurrence only; not impact evidence."]
+    },
+    "fema_openfema_declarations": {
+      "family": "fema",
+      "authority_type": "federal_structured_data",
+      "evidence_roles": ["official_response", "public_impact"],
+      "hazards": ["extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "county and state",
+      "temporal_resolution": "incident period",
+      "access": {"type": "official_adapter", "documentation_url": "https://www.fema.gov/openfema-data-page/disaster-declarations-summaries-v2"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["declaration candidate records"],
+      "domains": ["fema.gov"],
+      "role_template_overrides": {
+        "official_response": "fema_declaration_query",
+        "public_impact": "openfema_declaration_query"
+      },
+      "additional_template_ids": ["openfema_declaration_query"],
+      "limitations": ["Declaration evidence is response/programmatic; not direct impact without explicit spans."]
+    },
+    "usgs_nwis_water": {
+      "family": "usgs",
+      "authority_type": "federal_structured_data",
+      "evidence_roles": ["hydrologic_impact", "hazard_occurrence"],
+      "hazards": ["extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "gauge or basin",
+      "temporal_resolution": "instantaneous to daily",
+      "access": {"type": "official_adapter", "documentation_url": "https://waterdata.usgs.gov/nwis"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["streamflow and gauge candidate records"],
+      "domains": ["waterdata.usgs.gov", "usgs.gov"],
+      "limitations": ["Hydrologic evidence does not imply societal or agriculture impact unless stated."]
+    },
+    "usda_fsa_disaster_designations": {
+      "family": "usda_fsa",
+      "authority_type": "federal_official_text",
+      "evidence_roles": ["agriculture_impact_programmatic", "official_response"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "compound_candidate"],
+      "spatial_resolution": "county and state",
+      "temporal_resolution": "designation period or year",
+      "access": {"type": "domain_search", "documentation_url": "https://www.fsa.usda.gov/"},
+      "query_inputs": ["state", "county", "county_fips", "date_range", "hazard_type"],
+      "outputs": ["designation and emergency loan candidate records"],
+      "domains": ["fsa.usda.gov", "usda.gov"],
+      "query_domain_strategy": "all_domains",
+      "query_strategy": "all_matching_roles",
+      "role_template_overrides": {
+        "agriculture_impact_programmatic": "fsa_drought_designation_county_query",
+        "official_response": "fsa_drought_designation_county_query"
+      },
+      "additional_template_ids_by_role": {
+        "agriculture_impact_programmatic": [
+          "fsa_drought_designation_fips_query",
+          "fsa_drought_designation_state_news_query",
+          "fsa_drought_designation_primary_counties_query"
+        ],
+        "official_response": [
+          "fsa_drought_designation_state_news_query"
+        ]
+      },
+      "limitations": ["Programmatic agriculture evidence; not direct farm damage without explicit spans.", "Emergency loan and designation pages may be statewide or annual; page audit must verify county and time alignment."]
+    },
+    "drought_gov_usda_drought_designation_index": {
+      "family": "usda_fsa",
+      "authority_type": "federal_structured_data",
+      "evidence_roles": ["agriculture_impact_programmatic"],
+      "hazards": ["drought", "compound_candidate"],
+      "spatial_resolution": "county and state index",
+      "temporal_resolution": "designation index",
+      "access": {"type": "domain_search", "documentation_url": "https://www.drought.gov/data-maps-tools/usda-drought-disaster-designations"},
+      "query_inputs": ["state", "county", "county_fips", "date_range", "hazard_type"],
+      "outputs": ["source-discovery index records only"],
+      "domains": ["drought.gov"],
+      "role_template_overrides": {
+        "agriculture_impact_programmatic": "drought_gov_usda_designation_index_query"
+      },
+      "limitations": ["Source discovery only; the index page cannot be accepted alone as event evidence.", "Search results must route to county, state, and year-specific USDA/FSA records before acceptance."]
+    },
+    "usda_rma_cause_of_loss": {
+      "family": "usda_rma",
+      "authority_type": "federal_structured_data",
+      "evidence_roles": ["agriculture_impact_programmatic"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "compound_candidate"],
+      "spatial_resolution": "county, crop, and insurance year where available",
+      "temporal_resolution": "insurance year or cause-of-loss period",
+      "access": {"type": "domain_search", "documentation_url": "https://www.rma.usda.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["cause-of-loss or indemnity candidate records"],
+      "domains": ["rma.usda.gov"],
+      "limitations": ["Often annual/programmatic; may not validate event-level impact.", "Cause-of-loss and crop-insurance outputs must remain programmatic unless a fetched span gives crop, county, cause, and period."]
+    },
+    "usda_nass_ag_context": {
+      "family": "usda_nass",
+      "authority_type": "federal_structured_data",
+      "evidence_roles": ["agriculture_context"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "compound_candidate"],
+      "spatial_resolution": "county or state",
+      "temporal_resolution": "annual or seasonal",
+      "access": {"type": "domain_search", "documentation_url": "https://quickstats.nass.usda.gov/"},
+      "query_inputs": ["state", "county", "date_range"],
+      "outputs": ["agricultural exposure context"],
+      "domains": ["nass.usda.gov", "usda.gov"],
+      "role_template_overrides": {
+        "agriculture_context": "county_agriculture_report_query"
+      },
+      "limitations": ["Context only; cannot support agriculture impact alone."]
+    },
+    "california_oes": {
+      "family": "california_state_emergency",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["official_response", "public_impact"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "state, county, incident area",
+      "temporal_resolution": "incident or update",
+      "access": {"type": "domain_search", "documentation_url": "https://news.caloes.ca.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["state emergency candidate pages"],
+      "domains": ["caloes.ca.gov"],
+      "role_template_overrides": {
+        "official_response": "caloes_declaration_query",
+        "public_impact": "caloes_declaration_query"
+      },
+      "limitations": ["Statewide pages must not be inflated to target-county official evidence unless county is explicit."]
+    },
+    "california_dwr": {
+      "family": "california_water",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["hazard_occurrence", "hydrologic_impact", "official_response"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "compound_candidate"],
+      "spatial_resolution": "state, basin, reservoir, or county where stated",
+      "temporal_resolution": "daily to seasonal",
+      "access": {"type": "domain_search", "documentation_url": "https://water.ca.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["water and hydrologic candidate pages"],
+      "domains": ["water.ca.gov", "waterboards.ca.gov"],
+      "query_domain_strategy": "all_domains",
+      "additional_template_ids_by_role": {
+        "hazard_occurrence": ["dwr_hydrologic_summary_query"],
+        "hydrologic_impact": ["dwr_hydrologic_summary_query", "flood_control_district_query"],
+        "official_response": ["dwr_hydrologic_summary_query"],
+        "compound_linkage": ["dwr_hydrologic_summary_query", "flood_control_district_query"]
+      },
+      "limitations": ["Water context is not agriculture impact unless explicit."]
+    },
+    "california_agriculture": {
+      "family": "california_state_agriculture",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["agriculture_impact_direct", "agriculture_impact_programmatic", "agriculture_context"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "compound_candidate"],
+      "spatial_resolution": "state or county when stated",
+      "temporal_resolution": "event, seasonal, or annual",
+      "access": {"type": "domain_search", "documentation_url": "https://www.cdfa.ca.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["agriculture candidate pages"],
+      "domains": ["cdfa.ca.gov"],
+      "limitations": ["Context and program pages must not become direct impact without explicit spans.", "Statewide agricultural statistics and annual reviews are contextual unless target-county event damage is stated."]
+    },
+    "california_transportation": {
+      "family": "california_transportation",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["public_impact", "official_response"],
+      "hazards": ["extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "route, district, county, or state",
+      "temporal_resolution": "incident update",
+      "access": {"type": "domain_search", "documentation_url": "https://dot.ca.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["road closure and transport impact candidate pages"],
+      "domains": ["dot.ca.gov"],
+      "limitations": ["Road impacts are public impact, not agriculture impact."]
+    },
+    "county_city_government": {
+      "family": "county_city_government",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["official_response", "public_impact", "agriculture_impact_direct", "agriculture_context"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "county or city",
+      "temporal_resolution": "incident or update",
+      "access": {"type": "domain_search", "documentation_url": "https://www.ca.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["local official candidate pages"],
+      "domains": ["ca.gov"],
+      "additional_template_ids_by_role": {
+        "official_response": ["county_emergency_proclamation_query"],
+        "public_impact": ["county_emergency_proclamation_query", "county_public_works_query"],
+        "agriculture_impact_direct": ["county_agriculture_event_query"],
+        "agriculture_context": ["county_agriculture_report_query"]
+      },
+      "limitations": ["Domain search may be broad; page audit must verify target county or city.", "County agriculture pages are direct impact only when they state target-region crop, livestock, irrigation, or farmland damage for the aligned hazard/time window."]
+    },
+    "county_emergency_proclamation_pages": {
+      "family": "county_emergency_management",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["official_response", "public_impact"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "county, city, or local emergency jurisdiction",
+      "temporal_resolution": "incident, proclamation, update, or board action",
+      "access": {"type": "domain_search", "documentation_url": "https://www.usa.gov/local-governments"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type", "evidence_role"],
+      "outputs": ["local emergency proclamations", "OES pages", "emergency operations updates", "response pages"],
+      "domains": ["gov", "ca.gov"],
+      "query_domain_strategy": "all_domains",
+      "query_strategy": "all_matching_roles",
+      "role_template_overrides": {
+        "official_response": "county_emergency_proclamation_query",
+        "public_impact": "county_emergency_proclamation_query"
+      },
+      "limitations": ["County/OES source family is target-local only when the fetched page text or title names the target agency, county, or place."]
+    },
+    "county_public_works_and_flood_control": {
+      "family": "public_works_flood_control",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["public_impact", "official_response", "hydrologic_impact", "compound_linkage"],
+      "hazards": ["extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "county, city, flood-control district, road, levee, creek, river, or drainage system",
+      "temporal_resolution": "incident, update, project, or hydrologic summary",
+      "access": {"type": "domain_search", "documentation_url": "https://www.usa.gov/local-governments"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type", "evidence_role"],
+      "outputs": ["public works updates", "road closure pages", "levee/flood-control pages", "stormwater or drainage candidate pages"],
+      "domains": ["gov", "ca.gov"],
+      "query_domain_strategy": "all_domains",
+      "query_strategy": "all_matching_roles",
+      "role_template_overrides": {
+        "public_impact": "county_public_works_query",
+        "official_response": "county_public_works_query",
+        "hydrologic_impact": "flood_control_district_query",
+        "compound_linkage": "flood_control_district_query"
+      },
+      "limitations": ["Public works and flood-control pages can support impacts or hydrologic response only with target/time/hazard-aligned body spans."]
+    },
+    "county_agriculture_commissioner_reports": {
+      "family": "county_agriculture_commissioner",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["agriculture_context", "agriculture_impact_direct", "agriculture_impact_programmatic", "official_response"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "compound_candidate"],
+      "spatial_resolution": "county when target county is explicitly stated",
+      "temporal_resolution": "event, seasonal, or annual crop/livestock report",
+      "access": {"type": "domain_search", "documentation_url": "https://www.ca.gov/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type", "evidence_role"],
+      "outputs": ["county agricultural commissioner reports", "crop and livestock report candidate pages", "official county agriculture bulletins"],
+      "domains": ["content.govdelivery.com", "gov"],
+      "query_domain_strategy": "all_domains",
+      "query_strategy": "all_matching_roles",
+      "role_template_overrides": {
+        "agriculture_context": "county_agriculture_report_query",
+        "agriculture_impact_direct": "county_agriculture_event_query",
+        "agriculture_impact_programmatic": "county_agriculture_programmatic_query",
+        "official_response": "local_official_bulletin_query"
+      },
+      "limitations": ["Annual crop and livestock reports are contextual exposure unless an event-level damage span is present.", "GovDelivery or bulletin-host pages count as official only when the target county or agency is explicit in page text or title.", "No diagnostic URL may be injected; bulletin retrieval must come through general source-family queries."]
+    },
+    "california_local_government_bulletins": {
+      "family": "local_government_bulletin",
+      "authority_type": "state_local_official_text",
+      "evidence_roles": ["official_response", "public_impact", "agriculture_context"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "county, city, or state agency when explicit",
+      "temporal_resolution": "bulletin, update, or annual report",
+      "access": {"type": "domain_search", "documentation_url": "https://public.govdelivery.com/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type", "evidence_role"],
+      "outputs": ["local or state government bulletin candidate pages"],
+      "domains": ["content.govdelivery.com"],
+      "query_strategy": "all_matching_roles",
+      "role_template_overrides": {
+        "official_response": "local_official_bulletin_query",
+        "public_impact": "local_official_bulletin_query",
+        "agriculture_context": "local_bulletin_agriculture_query"
+      },
+      "limitations": ["Bulletin-host domain alone is not sufficient for official status; target-region agency alignment must be verified by page audit.", "Agriculture bulletins are contextual unless direct damage or programmatic disaster spans align to the event."]
+    },
+    "uc_cooperative_extension": {
+      "family": "extension",
+      "authority_type": "university_extension_sources",
+      "evidence_roles": ["agriculture_impact_direct", "agriculture_context", "compound_linkage"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "compound_candidate"],
+      "spatial_resolution": "county, region, or crop system",
+      "temporal_resolution": "event, seasonal, or annual",
+      "access": {"type": "domain_search", "documentation_url": "https://ucanr.edu/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["extension agriculture candidate pages"],
+      "domains": ["ucanr.edu"],
+      "limitations": ["Context pages cannot support agriculture impact alone."]
+    },
+    "credible_media_auxiliary": {
+      "family": "credible_media",
+      "authority_type": "reliable_media",
+      "evidence_roles": ["public_impact", "agriculture_impact_direct", "compound_linkage"],
+      "hazards": ["drought", "extreme_rainfall", "flood_related_rainfall", "flash_flood", "river_flood", "compound_candidate"],
+      "spatial_resolution": "article-specific",
+      "temporal_resolution": "article-specific",
+      "access": {"type": "domain_search", "documentation_url": "https://apnews.com/"},
+      "query_inputs": ["state", "county", "date_range", "hazard_type"],
+      "outputs": ["auxiliary narrative candidate pages"],
+      "domains": ["apnews.com", "reuters.com", "npr.org", "capitalpublicradio.org"],
+      "limitations": ["Auxiliary only; never official evidence."]
+    }
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "profile_contract_version": "ce_agent_repair_v2_data_profiles_v2",
+  "configuration_version": "ce_agent_repair_v2_final_alignment_config_v1.0.0",
+  "scientific_contract_version": "ce_agent_scientific_contract_v2.0.0",
+  "schema_version": "ce_agent_repaired_v2_schema_v1.0.0",
+  "alignment_addendum": {
+    "path": "contracts/ce_agent_alignment_contract_addendum_v1.json",
+    "version": "ce_agent_alignment_contract_addendum_v1.0.0",
+    "sha256": "f8b2cc93efd1b6b26bdc909223220e1c46f37e0805e41532b4de8bbeed2073b6",
+    "rule_ids": [
+      "USDM-AUX-GRADE-001",
+      "USDM-AUX-FALLBACK-001",
+      "USDM-AUX-NONNEG-001",
+      "USDM-AUX-ISOLATION-001",
+      "USDM-AUX-CLAIM-001",
+      "USDM-AUX-BIAS-001",
+      "NOAA-LOC-UNAVAILABLE-001",
+      "NOAA-LOC-FALLBACK-001",
+      "NOAA-LOC-NOEXPAND-001",
+      "NOAA-ZONE-UNAVAILABLE-001",
+      "NOAA-ZONE-FALLBACK-001",
+      "NOAA-ZONE-NOSUB-001",
+      "PILOT-DRAFT-NONPROD-001"
+    ]
+  },
+  "adapter_versions": {
+    "usdm_county_week": "ce_agent_repaired_v2_adapter_v1.usdm_county_week_vector_auxiliary_local.2",
+    "usdm_vector_auxiliary": "ce_agent_repaired_v2_adapter_v1.usdm_vector_auxiliary_local.1",
+    "noaa_stormevents": "ce_agent_repaired_v2_adapter_v1.noaa_stormevents_local.2",
+    "noaa_unavailable_fallback": "ce_agent_noaa_unavailable_enhancement_fallback_v1.0.0",
+    "frozen_webpage": "ce_agent_repaired_v2_adapter_v1.frozen_webpage_readonly.1"
+  },
+  "aggregator_version": "ce_agent_repaired_v2_aggregator_v1.canonical.1",
+  "runner_version": "ce_agent_repaired_v2_runner_v2.0.0",
+  "checkpoint_key_version": "ce_agent_repaired_v2_checkpoint_key_v2.0.0",
+  "network_policy": "forbidden",
+  "profiles": {
+    "repaired40_base": {
+      "candidate_count": 40,
+      "runnable_in_step_02": true,
+      "runnable_in_step_04": true,
+      "configuration_only": false,
+      "vector_ready": true,
+      "required_sources": {
+        "usdm_county_week": {
+          "enabled": true,
+          "required": true,
+          "package_id": "official_core_usdm_frozen40_county_week_35q_v1",
+          "package_hash": "ec57ebb61280f3dc4387687ba99f1a27707ce59df3e68f5cf0178170c64cce3f",
+          "package_slot": "frozen40_35_query_core"
+        },
+        "noaa_stormevents": {
+          "enabled": true,
+          "required": true,
+          "package_id": "official_core_noaa_stormevents_details_2021_2025_v1",
+          "package_hash": "74d30c7dc1b25188a11d9daa64f8a6cb5abc5ac99f25253948a3017f937cd135",
+          "package_slot": "stormevents_details_2021_2025_core"
+        },
+        "frozen_webpage": {
+          "enabled": true,
+          "required": true,
+          "package_id": "california_40_audited_provisional_demo_20260712",
+          "package_hash": "6748f9be062e88d10926424a267676660edb7b87d673ec10acf84d97580f63f1",
+          "identity_kind": "page_identity_bundle_sha256",
+          "package_slot": "step1_frozen_webpage"
+        },
+        "openfema": {
+          "enabled": false,
+          "required": false,
+          "optional": true,
+          "blocking": false,
+          "package_id": null,
+          "package_hash": null,
+          "package_slot": null,
+          "retained_role": "administrative_response",
+          "supports_primary_axes": []
+        }
+      },
+      "required_support_packages": {
+        "usdm_vector_auxiliary": {
+          "enabled": true,
+          "required": true,
+          "package_id": "production_support_usdm_weekly_vectors_frozen40_14w_v1",
+          "package_hash": "75a9796334039bed385bcb89b4c0459bde7e039bcbdf828129f05cf2dee5f2ba",
+          "package_slot": "frozen40_14_reference_week_production_support",
+          "scope": "frozen40_only_14_reference_weeks",
+          "contributes_primary_axis": false
+        }
+      },
+      "enhancements": {
+        "noaa_locations": {
+          "decision": "ENHANCEMENT_UNAVAILABLE",
+          "package_id": null,
+          "package_path": null,
+          "adapter_activation": false,
+          "acquisition_enabled": false,
+          "directory_discovery_enabled": false,
+          "base_fallback": "Step-2 local/county/time alignment remains active",
+          "missing_enhancement_is_negative": false,
+          "fail_closed_history": "approved 2021 URL returned HTTP 404 three times; 2022-2025 were not attempted",
+          "rule_ids": [
+            "NOAA-LOC-UNAVAILABLE-001",
+            "NOAA-LOC-FALLBACK-001",
+            "NOAA-LOC-NOEXPAND-001"
+          ]
+        },
+        "noaa_historical_zones": {
+          "decision": "ENHANCEMENT_UNAVAILABLE",
+          "package_id": null,
+          "package_path": null,
+          "adapter_activation": false,
+          "acquisition_enabled": false,
+          "directory_discovery_enabled": false,
+          "current_zone_substitution": false,
+          "base_fallback": "Step-2 zone context/unresolved handling remains active",
+          "rule_ids": [
+            "NOAA-ZONE-UNAVAILABLE-001",
+            "NOAA-ZONE-FALLBACK-001",
+            "NOAA-ZONE-NOSUB-001"
+          ]
+        }
+      },
+      "required_absences": [
+        "complete_205_query_usdm_package",
+        "noaa_locations_package",
+        "noaa_historical_zone_package",
+        "pilot_package_production_reference"
+      ],
+      "source_packages_read_only": true
+    },
+    "future368_base": {
+      "candidate_count": 368,
+      "runnable_in_step_02": false,
+      "runnable_in_step_04": false,
+      "configuration_only": true,
+      "vector_ready": false,
+      "required_sources": {
+        "usdm_county_week": {
+          "enabled": true,
+          "required": true,
+          "package_id": null,
+          "package_hash": null,
+          "package_slot": "future368_usdm_package_not_built"
+        },
+        "noaa_stormevents": {
+          "enabled": true,
+          "required": true,
+          "package_id": null,
+          "package_hash": null,
+          "package_slot": "future368_noaa_package_requirements_not_validated"
+        },
+        "frozen_webpage": {
+          "enabled": false,
+          "required": false,
+          "package_id": null,
+          "package_hash": null,
+          "package_slot": "future_web_evidence_not_started"
+        },
+        "openfema": {
+          "enabled": false,
+          "required": false,
+          "optional": true,
+          "blocking": false,
+          "package_id": null,
+          "package_hash": null,
+          "package_slot": null,
+          "retained_role": "administrative_response",
+          "supports_primary_axes": []
+        }
+      },
+      "required_support_packages": {
+        "usdm_vector_auxiliary": {
+          "enabled": false,
+          "required": false,
+          "package_id": null,
+          "package_hash": null,
+          "package_slot": "future368_complete_vector_package_not_built",
+          "scope": "unfulfilled_future_requirement",
+          "contributes_primary_axis": false
+        }
+      },
+      "enhancements": {
+        "noaa_locations": {
+          "decision": "ENHANCEMENT_UNAVAILABLE",
+          "package_id": null,
+          "package_path": null,
+          "adapter_activation": false,
+          "acquisition_enabled": false,
+          "directory_discovery_enabled": false,
+          "base_fallback": "Step-2 local/county/time alignment remains active",
+          "missing_enhancement_is_negative": false,
+          "fail_closed_history": "approved 2021 URL returned HTTP 404 three times; 2022-2025 were not attempted",
+          "rule_ids": [
+            "NOAA-LOC-UNAVAILABLE-001",
+            "NOAA-LOC-FALLBACK-001",
+            "NOAA-LOC-NOEXPAND-001"
+          ]
+        },
+        "noaa_historical_zones": {
+          "decision": "ENHANCEMENT_UNAVAILABLE",
+          "package_id": null,
+          "package_path": null,
+          "adapter_activation": false,
+          "acquisition_enabled": false,
+          "directory_discovery_enabled": false,
+          "current_zone_substitution": false,
+          "base_fallback": "Step-2 zone context/unresolved handling remains active",
+          "rule_ids": [
+            "NOAA-ZONE-UNAVAILABLE-001",
+            "NOAA-ZONE-FALLBACK-001",
+            "NOAA-ZONE-NOSUB-001"
+          ]
+        }
+      },
+      "source_packages_read_only": true
+    }
+  }
+}

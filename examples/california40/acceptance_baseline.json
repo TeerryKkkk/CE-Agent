@@ -1,0 +1,27 @@
+{
+  "case_change_count": 1,
+  "case_count": 40,
+  "case_final_tier_agreement_count": 37,
+  "case_full_field_agreement_count": 28,
+  "changes_are_mechanically_justified_negative_only": true,
+  "created_at_utc": "2026-07-12T19:40:30.113632+00:00",
+  "external_api_calls": 0,
+  "false_support_page_ids": [],
+  "historical_unsafe_support_returned_page_ids": [],
+  "known_aggregation_error_count": 6,
+  "known_aggregation_errors_fixed": 6,
+  "page_change_count": 1,
+  "page_count": 110,
+  "page_result_counts": {
+    "does_not_support": 65,
+    "insufficient_source_content": 7,
+    "supports": 6,
+    "unresolved": 32
+  },
+  "page_support_precision": 1.0,
+  "page_support_recall": 0.75,
+  "readable_as_insufficient_page_ids": [],
+  "remaining_case_disagreement_count": 12,
+  "remaining_tier_disagreement_count": 3,
+  "unsafe_local_positive_upgrade_page_ids": []
+}

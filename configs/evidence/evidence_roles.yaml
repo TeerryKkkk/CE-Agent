@@ -1,0 +1,128 @@
+{
+  "version": "evidence_roles_v2",
+  "date": "2026-06-04",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "roles": {
+    "hazard_occurrence": {
+      "can_support": [
+        "drought condition",
+        "extreme rainfall",
+        "flood or flash flood",
+        "hydrologic exceedance",
+        "storm or flood event record"
+      ],
+      "must_not_support_alone": [
+        "impact",
+        "agriculture loss",
+        "response",
+        "compound-event status"
+      ],
+      "agriculture_evidence_type": null
+    },
+    "official_response": {
+      "can_support": [
+        "FEMA declaration",
+        "FSA designation",
+        "emergency response",
+        "state or county action",
+        "recovery, funding, or assistance"
+      ],
+      "must_not_support_alone": [
+        "physical causality",
+        "direct impact",
+        "agriculture impact"
+      ],
+      "agriculture_evidence_type": "programmatic"
+    },
+    "public_impact": {
+      "can_support": [
+        "evacuations",
+        "road closures",
+        "infrastructure damage",
+        "property damage",
+        "fatalities or injuries",
+        "water-supply disruption",
+        "community disruption"
+      ],
+      "must_not_support_alone": [
+        "compound-event status",
+        "agriculture impact unless agriculture content is explicit"
+      ],
+      "agriculture_evidence_type": null
+    },
+    "agriculture_impact_direct": {
+      "can_support": [
+        "crop damage",
+        "farmland flooding",
+        "orchard or vineyard damage",
+        "livestock loss",
+        "pasture loss",
+        "irrigation shortage",
+        "prevented planting",
+        "harvest delay",
+        "crop-specific losses"
+      ],
+      "must_not_support_alone": [
+        "compound-event status"
+      ],
+      "agriculture_evidence_type": "direct"
+    },
+    "agriculture_impact_programmatic": {
+      "can_support": [
+        "FSA disaster designation",
+        "RMA cause-of-loss",
+        "crop-insurance indemnity evidence",
+        "emergency loan eligibility",
+        "official programmatic agriculture-disaster response"
+      ],
+      "must_not_support_alone": [
+        "direct farm damage unless direct damage spans are present"
+      ],
+      "agriculture_evidence_type": "programmatic"
+    },
+    "agriculture_context": {
+      "can_support": [
+        "crop distribution",
+        "baseline production",
+        "NASS county context",
+        "agricultural exposure",
+        "county agricultural commissioner annual crop or livestock report",
+        "crop value, acreage, or production context"
+      ],
+      "must_not_support_alone": [
+        "agriculture impact",
+        "response",
+        "compound-event status",
+        "event-level crop, livestock, irrigation, or farmland damage"
+      ],
+      "agriculture_evidence_type": "contextual"
+    },
+    "hydrologic_impact": {
+      "can_support": [
+        "streamflow exceedance",
+        "gauge height",
+        "reservoir or water-system conditions",
+        "flood-stage evidence"
+      ],
+      "must_not_support_alone": [
+        "societal impact unless stated",
+        "agriculture impact unless stated"
+      ],
+      "agriculture_evidence_type": null
+    },
+    "compound_linkage": {
+      "can_support": [
+        "explicit interaction",
+        "preconditioning",
+        "sequential aggravation",
+        "cascade",
+        "shared affected sector",
+        "source-stated relationship between drought and rainfall or flood impacts"
+      ],
+      "must_not_support_alone": [
+        "compound-event status from physical co-occurrence only"
+      ],
+      "agriculture_evidence_type": null
+    }
+  }
+}

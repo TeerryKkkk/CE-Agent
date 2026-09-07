@@ -1,0 +1,70 @@
+schema_version: 1
+
+run:
+  name: california_mainline
+  stage: remaining_368_repaired_v2_production
+  description: >
+    California remaining-368 production extension of the frozen repaired-40
+    scientific contract. Live execution remains explicit and checkpointed.
+
+region:
+  state: CA
+  state_name: California
+  fips_prefix: "06"
+
+inputs:
+  candidate_manifest: dataset/mainline/california/california_40_case_manifest_v1.csv
+  candidate_inventory: dataset/mainline/california/california_candidate_inventory_v1.csv
+  input_policy: explicit_frozen_manifest_required
+
+outputs:
+  output_dir: outputs/california_mainline
+
+cache:
+  cache_root: outputs/cache/california_mainline
+  isolate_by_state: true
+
+retrieval:
+  dry_run_default: true
+  allow_network_default: false
+  openfema_core_evidence_enabled: false
+  source_lanes:
+    - structured_official
+    - county_city_official
+    - sheriff_oes_emergency
+    - public_works_flood_control
+    - cal_oes
+    - caltrans
+    - california_dwr
+    - agriculture_official
+    - local_regional_news
+  llm_query_expansion:
+    enabled: true
+    max_queries_per_case: 4
+    max_hazard_queries_per_case: 2
+    max_impact_queries_per_case: 3
+    max_linkage_queries_per_case: 1
+    max_pages_per_case: 3
+    model: gpt-5.5-2026-04-23
+
+evidence_policy:
+  require_quote_grounding: true
+  wrong_state_guard: true
+  preserve_axes:
+    - physical_candidate_status
+    - drought_hazard_support
+    - wet_hazard_support
+    - impact_support
+    - explicit_linkage_support
+    - support_tier
+    - missingness_label
+    - audit_label
+  forbidden_claims:
+    - confirmed_compound_event_without_public_evidence
+    - p99_rainfall_equals_flood_without_public_evidence
+    - dter_as_ground_truth
+    - missing_public_impact_evidence_means_no_impact
+
+models:
+  llm_judge_model: gpt-5.5-2026-04-23
+  api_key_env_var: null

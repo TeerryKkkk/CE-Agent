@@ -1,0 +1,36 @@
+{
+  "version": "page_rejection_taxonomy_v1",
+  "date": "2026-06-04",
+  "format_note": "JSON-compatible YAML; parsed without third-party dependencies.",
+  "terminal_statuses": [
+    "ACCEPTED_EVENT_EVIDENCE",
+    "ACCEPTED_CONTEXT_ONLY",
+    "REJECT_WRONG_TIME",
+    "REJECT_WRONG_LOCATION",
+    "REJECT_WRONG_HAZARD",
+    "REJECT_NO_EVENT_DETAIL",
+    "REJECT_NO_PUBLIC_OR_AG_IMPACT",
+    "REJECT_GENERIC_CLIMATE_BACKGROUND",
+    "REJECT_SOURCE_TOO_BROAD",
+    "REJECT_DUPLICATE",
+    "REJECT_UNFETCHABLE",
+    "REJECT_EMPTY_OR_SCRIPT_RENDERED",
+    "REJECT_LOW_CREDIBILITY",
+    "REJECT_UNSUPPORTED_BY_SPAN",
+    "REJECT_AMBIGUOUS_ALIGNMENT",
+    "REJECT_PARSER_FAILURE"
+  ],
+  "reason_mapping": {
+    "target_location_not_explicit_or_broadly_relevant": "REJECT_WRONG_LOCATION",
+    "hazard_not_relevant": "REJECT_WRONG_HAZARD",
+    "event_time_not_aligned": "REJECT_WRONG_TIME",
+    "broad_or_wrong_state_noaa_context_not_target_local": "REJECT_SOURCE_TOO_BROAD",
+    "broad_noaa_national_context_not_target_local": "REJECT_GENERIC_CLIMATE_BACKGROUND",
+    "source_discovery_index_not_event_evidence": "REJECT_NO_EVENT_DETAIL",
+    "unknown_source_not_admissible_for_support": "REJECT_LOW_CREDIBILITY",
+    "fetch_failed_or_http_error": "REJECT_UNFETCHABLE",
+    "cleaned_text_too_short": "REJECT_EMPTY_OR_SCRIPT_RENDERED",
+    "generic_media_requires_manual_review": "REJECT_LOW_CREDIBILITY",
+    "insufficient_target_local_event_evidence_for_acceptance": "REJECT_AMBIGUOUS_ALIGNMENT"
+  }
+}

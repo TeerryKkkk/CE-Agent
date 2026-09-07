@@ -1,0 +1,23 @@
+schema_version: 1
+
+run:
+  name: texas_legacy_pilot
+  stage: legacy_control
+  description: >
+    Legacy Texas raw-CE pilot/control configuration. Kept for reproducibility
+    and DTER comparison. Not the active California mainline default.
+
+region:
+  state: TX
+  state_name: Texas
+  fips_prefix: "48"
+
+legacy:
+  existing_config: configs/raw_ce_pilot_texas_2021_2025.yaml
+  existing_output_dir: outputs/raw_ce_pilot/texas_2021_2025
+  preserve_reproducibility: true
+  dter_policy: comparison_only_not_ground_truth
+
+migration_policy:
+  active_default: false
+  do_not_rewrite_historical_outputs: true

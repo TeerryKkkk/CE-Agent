@@ -1,0 +1,18 @@
+{
+  "dataset": "California compound-event evidence replay",
+  "case_count": 40,
+  "page_count": 110,
+  "preprocessing": [
+    "Website sharing tokens removed from archived text.",
+    "HTTP client metadata omitted.",
+    "Evidence classification fields use descriptive names."
+  ],
+  "replay_input_sha256": {
+    "replay_inputs/candidate_page_manifest.jsonl": "fc260253133eaeb3c58ecaecbcb9ff80143723dab73febdf123ef0f00373ffa2",
+    "replay_inputs/final_semantic_judgments.jsonl": "b8d6262bdbdfa8b8090e9a26b98584df8b6b7b81fc7e7332ffb16cc15af702d8",
+    "replay_inputs/frozen_configuration.json": "85c6d6058694b144f12fd7ce149f9fb3c0f8d5ae1ddece187ae6bcf42ab59b64",
+    "replay_inputs/logical_frozen_pages.jsonl": "e2d11e54821533b9504e8a7fdc98544a9eadc55a3149c83af06ef84343c08227",
+    "replay_inputs/prior_page_results.csv": "ece4b2d3950b621bf43d25ed6714c15296033af92ddf9780ed824afc2a00eff6",
+    "replay_inputs/structured_evidence_results.csv": "a8794d60634861d9a314f50c636fc04de0bc538a938b613cd1684a1ffecbf17a"
+  }
+}
